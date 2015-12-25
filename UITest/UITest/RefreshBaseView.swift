@@ -25,6 +25,7 @@ public protocol RefreshDelegate : NSObjectProtocol{
 }
 
 let kContentOffset = "contentOffset"
+let kContentSize = "contentSize"
 let AnimationDuraiton = 0.2
 
 class RefreshBaseView: UIView {
@@ -62,7 +63,6 @@ class RefreshBaseView: UIView {
         
         if(newSuperview != nil){
             newSuperview?.addObserver(self, forKeyPath: kContentOffset, options: NSKeyValueObservingOptions.New, context: nil)
-            newSuperview?.addObserver(self, forKeyPath: "tracking", options: NSKeyValueObservingOptions.New, context: nil)
             var rect = self.frame
             rect.size.width = (newSuperview?.frame.size.width)!
             rect.origin.x = 0
@@ -70,6 +70,7 @@ class RefreshBaseView: UIView {
             
             self.scrollView = newSuperview as! UIScrollView
             scrollViewOriginalInset = self.scrollView.contentInset
+            print("top = \(self.scrollView.contentInset.top)")
         }
     }
     
@@ -80,6 +81,10 @@ class RefreshBaseView: UIView {
     }
     
     internal func onContentOffsetChanged(){
+        //子类实现
+    }
+    
+    internal func onContentInsetChanged(){
         //子类实现
     }
     

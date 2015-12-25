@@ -40,10 +40,11 @@ class RefreshHeaderView: RefreshBaseView {
             case RefreshState.Refreshing:
                 label.text = "刷新中..."
                 UIView.animateWithDuration(AnimationDuraiton, animations: { () -> Void in
+//                    print("offset 1 = \(self.scrollView.contentOffset.y)")
                     var contentInset = self.scrollView.contentInset
                     contentInset.top = self.scrollViewOriginalInset.top + self.originalHeight
                     self.scrollView.contentInset = contentInset
-                    
+//                    print("offset 2 = \(self.scrollView.contentOffset.y)")
 //                    var offset:CGPoint = self.scrollView.contentOffset
 //                    offset.y = -top
 //                    self.scrollView.contentOffset = offset
@@ -78,8 +79,12 @@ class RefreshHeaderView: RefreshBaseView {
 
     override func willMoveToSuperview(newSuperview: UIView?) {
         super.willMoveToSuperview(newSuperview)
+        adjustFrame()
+    }
+        
+    internal func adjustFrame(){
         var rect = self.frame
-        rect.origin.y = -rect.size.height
+        rect.origin.y = -rect.size.height - scrollViewOriginalInset.top
         self.frame = rect
     }
     
@@ -98,16 +103,15 @@ class RefreshHeaderView: RefreshBaseView {
     
     private func changeStateWithOffset(){
         let offsetY = self.scrollView.contentOffset.y
-        let threthold = -scrollViewOriginalInset.top //标识是否显示出header
-        print("dragging = \(scrollView.dragging)")
-        if(offsetY >= threthold){
+        let threshold = -scrollViewOriginalInset.top //标识是否显示出header
+        if(offsetY >= threshold){
             return
         }
         if(self.scrollView.dragging){
-            if(self.state == RefreshState.Normal && offsetY < threthold - originalHeight){
+            if(self.state == RefreshState.Normal && offsetY < threshold - originalHeight){
                 // Normal -> ReleaseToRefresh
                 self.state = RefreshState.ReleaseToRefresh
-            }else if(self.state == RefreshState.ReleaseToRefresh && offsetY >= threthold - originalHeight){
+            }else if(self.state == RefreshState.ReleaseToRefresh && offsetY >= threshold - originalHeight){
                 // ReleaseToRefresh -> Normal
                 self.state = RefreshState.Normal
             }

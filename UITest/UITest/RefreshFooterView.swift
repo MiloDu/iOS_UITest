@@ -22,12 +22,12 @@ class RefreshFooterView: RefreshBaseView {
             print("state = \(self.state)")
             switch self.state{
             case RefreshState.Normal:
-                label.text = "下拉刷新"
+                label.text = "上拉加载"
                 if(oldValue == RefreshState.Refreshing){
                     //Refresh End
                     UIView.animateWithDuration(AnimationDuraiton, animations: { () -> Void in
                         var contentInset = self.scrollView.contentInset
-                        contentInset.top = self.scrollViewOriginalInset.top
+                        contentInset.bottom = self.scrollViewOriginalInset.bottom
                         self.scrollView.contentInset = contentInset
                     })
                 }else{
@@ -35,23 +35,24 @@ class RefreshFooterView: RefreshBaseView {
                 }
                 break
             case RefreshState.ReleaseToRefresh:
-                label.text = "松开刷新"
+                label.text = "松开加载"
                 //Drag change
                 break
             case RefreshState.Refreshing:
-                label.text = "刷新中..."
+                label.text = "加载中..."
                 UIView.animateWithDuration(AnimationDuraiton, animations: { () -> Void in
-                    var contentInset = self.scrollView.contentInset
-                    contentInset.top = self.scrollViewOriginalInset.top + self.originalHeight
-                    self.scrollView.contentInset = contentInset
-                    
-                    //                    var offset:CGPoint = self.scrollView.contentOffset
-                    //                    offset.y = -top
-                    //                    self.scrollView.contentOffset = offset
+                    var bottom:CGFloat = self.frame.size.height + self.scrollViewOriginalInset.bottom
+                    let maxOffsetY = self.computeMaxOffsetY()
+                    if maxOffsetY < 0 {
+                        bottom = bottom - maxOffsetY
+                    }
+                    var contentInset = self.scrollView.contentInset;
+                    contentInset.bottom = bottom;
+                    self.scrollView.contentInset = contentInset;
                 })
                 
                 if(self.scrollView.delegateRefresh != nil){
-                    self.scrollView.delegateRefresh!.onRefresh()
+                    self.scrollView.delegateRefresh!.onLoad()
                 }
                 break
             }
@@ -68,20 +69,42 @@ class RefreshFooterView: RefreshBaseView {
     }
     
     private func config(){
-        self.backgroundColor = UIColor.greenColor()
+        self.backgroundColor = UIColor.redColor()
         label = UILabel(frame: self.bounds)
         label.font = UIFont.systemFontOfSize(12)
         label.textColor = UIColor.blackColor()
-        label.text = "loading"
         label.textAlignment = NSTextAlignment.Center
         self.addSubview(label)
     }
     
     override func willMoveToSuperview(newSuperview: UIView?) {
         super.willMoveToSuperview(newSuperview)
+        adjustFrame()
+        if(self.superview != nil){
+            self.superview?.removeObserver(self, forKeyPath: kContentSize)
+        }
+        
+        if(newSuperview != nil){
+            newSuperview?.addObserver(self, forKeyPath: kContentSize, options: NSKeyValueObservingOptions.New, context: nil)
+        }
+    }
+    
+    internal func adjustFrame(){
+        let y = max(self.scrollView.contentSize.height, self.scrollView.frame.size.height) + scrollViewOriginalInset.bottom
         var rect = self.frame
-        rect.origin.y = -rect.size.height
+        rect.origin.y = y
         self.frame = rect
+    }
+    
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+        if(keyPath == kContentSize){
+            onContentInsetChanged()
+        }
+    }
+    
+    internal func onContentSizeChanged(){
+        adjustFrame()
     }
     
     override func onContentOffsetChanged() {
@@ -99,17 +122,19 @@ class RefreshFooterView: RefreshBaseView {
     
     private func changeStateWithOffset(){
         let offsetY = self.scrollView.contentOffset.y
-        let maxOffsetY = self.scrollView.contentSize.height - (self.scrollView.frame.size.height + self.scrollViewOriginalInset.top + scrollViewOriginalInset.bottom)
-        let threthold : CGFloat = 0 //标识是否显示出
-        print("dragging = \(scrollView.dragging)")
-        if(offsetY >= threthold){
+        let maxOffsetY = computeMaxOffsetY()
+        var threshold : CGFloat = 0 //标识是否显示出
+        if(maxOffsetY > 0){
+            threshold = maxOffsetY
+        }
+        if(offsetY <= threshold){
             return
         }
         if(self.scrollView.dragging){
-            if(self.state == RefreshState.Normal && offsetY < threthold - originalHeight){
+            if(self.state == RefreshState.Normal && offsetY > threshold + originalHeight){
                 // Normal -> ReleaseToRefresh
                 self.state = RefreshState.ReleaseToRefresh
-            }else if(self.state == RefreshState.ReleaseToRefresh && offsetY >= threthold - originalHeight){
+            }else if(self.state == RefreshState.ReleaseToRefresh && offsetY <= threshold + originalHeight){
                 // ReleaseToRefresh -> Normal
                 self.state = RefreshState.Normal
             }
@@ -118,5 +143,10 @@ class RefreshFooterView: RefreshBaseView {
                 self.state = RefreshState.Refreshing
             }
         }
+    }
+    
+    private func computeMaxOffsetY() ->CGFloat{
+        let maxOffsetY = self.scrollView.contentSize.height - (self.scrollView.frame.size.height + self.scrollViewOriginalInset.top + scrollViewOriginalInset.bottom)
+        return maxOffsetY
     }
 }

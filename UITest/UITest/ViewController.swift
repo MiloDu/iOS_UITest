@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, RefreshDelegate {
+class ViewController: UIViewController, RefreshDelegate,UITableViewDelegate {
 
     var circleView : MyView!
     var tableView : UITableView!
@@ -22,9 +22,11 @@ class ViewController: UIViewController, RefreshDelegate {
         circleView = MyView(frame: CGRectMake(margin,100, width - margin * 2,width - margin * 2))
         self.view.addSubview(circleView)
         tableView = UITableView(frame: self.view.bounds)
-        tableView.addRefreshHeader(frame: CGRectMake(0 , 0, 320, 64))
+        
         tableView.delegateRefresh = self
-//        tableView.addSubview(RefreshBaseView.createHeaderView(frame : CGRectMake(0,0,320,64)))
+        tableView.delegate = self
+        tableView.addRefreshHeader(frame: CGRectMake(0 , 0, 320, 64))
+        tableView.addRefreshFooter(frame:CGRectMake(0,0,320,64))
         self.view.addSubview(tableView)
     }
     
@@ -76,6 +78,10 @@ class ViewController: UIViewController, RefreshDelegate {
         self.tableView.endRefresh()
     }
 
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        print("offset = \(scrollView.contentOffset.y)")
+        print("inset  =\(scrollView.contentInset.top)")
+    }
 }
 
 

@@ -41,8 +41,8 @@ extension UIScrollView {
             objc_setAssociatedObject(self, &RefreshKey.Footer, view, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-
     
+    //注意：添加header或者footer必须在设置UIScrollView的contentInset属性之后
     public func addRefreshHeader(frame frame: CGRect){
         let header = RefreshBaseView.createHeaderView(frame: frame)
         self.refreshHeader = header
@@ -61,7 +61,7 @@ extension UIScrollView {
         self.refreshHeader?.endRefresh()
     }
     
-    public func addRefreshFooter(frame :  CGRect){
+    public func addRefreshFooter(frame frame : CGRect){
         let footer = RefreshBaseView.createFooterView(frame: frame)
         self.refreshFooter = footer
         self.addSubview(footer)
@@ -70,22 +70,4 @@ extension UIScrollView {
     public func removeRefreshFooter(){
         self.refreshFooter?.removeFromSuperview()
     }
-    
-    public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesBegan(touches, withEvent: event)
-        print("===============touch began================")
-    }
-    
-    public override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesEnded(touches, withEvent: event)
-        print("======================Touchend===================")
-    }
-    
-    public override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        super.touchesCancelled(touches, withEvent: event)
-        print("===========cancel==============")
-    }
-//    public override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        print("================move=================")
-//    }
 }
