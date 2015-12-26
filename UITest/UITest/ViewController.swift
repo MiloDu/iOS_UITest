@@ -8,18 +8,22 @@
 
 import UIKit
 
-class ViewController: UIViewController, DMRefreshDelegate {
+class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate {
     let WIDTH_SCREEN = UIScreen.mainScreen().bounds.size.width
     let HEIGHT_SCREEN = UIScreen.mainScreen().bounds.size.height
     
     var circleView : DMCircleView!
+    
+    let kCell = "Cell"
     var tableView : UITableView!
+    var array = Array<String>()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.edgesForExtendedLayout = UIRectEdge.None
         
 //        testCircleView()
         testRefresh()
+        
     }
     
     func testCircleView(){
@@ -28,11 +32,18 @@ class ViewController: UIViewController, DMRefreshDelegate {
     }
     
     func testRefresh(){
-        tableView = UITableView(frame: self.view.bounds)
-        tableView.addRefreshHeader(frame: CGRectMake(0 , 0, 320, 64))
-        tableView.delegateRefresh = self
-        tableView.addRefreshFooter(frame : CGRectMake(0,0,320,64))
+        for i in 0 ..< 5 {
+            array.append(String(i))
+        }
+        tableView = UITableView(frame: frameView)
+        tableView.registerClass(CellTest.self, forCellReuseIdentifier: kCell)
+        tableView.tableFooterView = UIView() //隐藏无效的分割线
+        tableView.dataSource = self
         self.view.addSubview(tableView)
+        
+        tableView.addRefreshHeader(frame: CGRectMake(0 , 0, 320, 64))
+        tableView.addRefreshFooter(frame : CGRectMake(0,0,320,64))
+        tableView.delegateRefresh = self
         print("table = \(tableView.frame)")
     }
     
@@ -49,16 +60,35 @@ class ViewController: UIViewController, DMRefreshDelegate {
     }
     
     //#prama RefreshDelegate
-    func onRefresh(){
-        print("onRefresh")
-        NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "refreshEnd", userInfo: nil, repeats: false)
+    func onRefresh(type : DMRefreshViewType){
+        print("onRefresh = \(type)")
+        if(type == DMRefreshViewType.Header){
+            NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "refreshHeaderEnd", userInfo: nil, repeats: false)
+        }else{
+            NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "refreshFooterEnd", userInfo: nil, repeats: false)
+        }
     }
     
-    func onLoad(){
-        
+    func refreshHeaderEnd(){
+        print("refreshHeaderEnd")
+        array.append(String(array.count))
+        tableView.reloadData()
+        self.tableView.endRefresh(DMRefreshViewType.Header)
     }
     
-    func refreshEnd(){
-        self.tableView.endRefresh()
+    func refreshFooterEnd(){
+        print("refreshFooterEnd")
+        self.tableView.endRefresh(DMRefreshViewType.Footer)
+    }
+    
+    //prama UITableViewDataSource
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+        let cell = tableView.dequeueReusableCellWithIdentifier(kCell)!
+        cell.textLabel?.text = array[indexPath.row]
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        return array.count
     }
 }

@@ -1,5 +1,5 @@
 ////
-////  DMRefreshFooterView.swift
+////  RefreshFooterView.swift
 ////  UITest
 ////
 ////  Created by Milo on 15/12/25.
@@ -8,8 +8,8 @@
 //
 //import UIKit
 //
-//class DMRefreshFooterView: DMRefreshBaseView {
-//    
+//class DMRefreshFooterViewBase: DMRefreshBaseView {
+//
 //    var label : UILabel!
 //    override var state : DMRefreshState{
 //        didSet{
@@ -24,7 +24,7 @@
 //            case DMRefreshState.Normal:
 //                label.text = "上拉加载"
 //                if(oldValue == DMRefreshState.Refreshing){
-//                    //DMRefresh End
+//                    //Refresh End
 //                    UIView.animateWithDuration(DMAnimationDuraiton, animations: { () -> Void in
 //                        var contentInset = self.scrollView.contentInset
 //                        contentInset.bottom = self.scrollViewOriginalInset.bottom
@@ -92,7 +92,7 @@
 //    internal func adjustFrame(){
 //        let y = max(self.scrollView.contentSize.height, self.scrollView.frame.size.height) + scrollViewOriginalInset.bottom
 //        var rect = self.frame
-//        rect.origin.y = y
+//        rect.origin.y = y + self.scrollViewOriginalInset.bottom
 //        self.frame = rect
 //    }
 //    
@@ -132,10 +132,10 @@
 //        }
 //        if(self.scrollView.dragging){
 //            if(self.state == DMRefreshState.Normal && offsetY > threshold + originalHeight){
-//                // Normal -> ReleaseToDMRefresh
+//                // Normal -> ReleaseToRefresh
 //                self.state = DMRefreshState.ReleaseToRefresh
 //            }else if(self.state == DMRefreshState.ReleaseToRefresh && offsetY <= threshold + originalHeight){
-//                // ReleaseToDMRefresh -> Normal
+//                // ReleaseToRefresh -> Normal
 //                self.state = DMRefreshState.Normal
 //            }
 //        }else{

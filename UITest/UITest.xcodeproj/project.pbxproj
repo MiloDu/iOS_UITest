@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26B8160B1C2EBB730062692A /* CellTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B8160A1C2EBB730062692A /* CellTest.swift */; };
 		26DB0F091C2E85BC007C1E28 /* DMCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0EFF1C2E85BC007C1E28 /* DMCircleView.swift */; };
 		26DB0F0A1C2E85BC007C1E28 /* DMProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0F011C2E85BC007C1E28 /* DMProgressView.swift */; };
 		26DB0F0B1C2E85BC007C1E28 /* DMRefreshBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0F031C2E85BC007C1E28 /* DMRefreshBaseView.swift */; };
-		26DB0F0C1C2E85BC007C1E28 /* DMRefreshFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0F041C2E85BC007C1E28 /* DMRefreshFooterView.swift */; };
-		26DB0F0D1C2E85BC007C1E28 /* DMRefreshHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0F051C2E85BC007C1E28 /* DMRefreshHeaderView.swift */; };
+		26DB0F0C1C2E85BC007C1E28 /* DMRefreshFooterViewDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0F041C2E85BC007C1E28 /* DMRefreshFooterViewDefault.swift */; };
+		26DB0F0D1C2E85BC007C1E28 /* DMRefreshHeaderViewDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0F051C2E85BC007C1E28 /* DMRefreshHeaderViewDefault.swift */; };
 		26DB0F0E1C2E85BC007C1E28 /* ScrollView+DMRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0F061C2E85BC007C1E28 /* ScrollView+DMRefresh.swift */; };
 		26DB0F0F1C2E85BC007C1E28 /* ExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0F081C2E85BC007C1E28 /* ExtensionViewController.swift */; };
 		26DB0F111C2E85DE007C1E28 /* DMUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0F101C2E85DE007C1E28 /* DMUtils.swift */; };
@@ -24,11 +25,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		26B8160A1C2EBB730062692A /* CellTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellTest.swift; sourceTree = "<group>"; };
 		26DB0EFF1C2E85BC007C1E28 /* DMCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMCircleView.swift; sourceTree = "<group>"; };
 		26DB0F011C2E85BC007C1E28 /* DMProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMProgressView.swift; sourceTree = "<group>"; };
 		26DB0F031C2E85BC007C1E28 /* DMRefreshBaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMRefreshBaseView.swift; sourceTree = "<group>"; };
-		26DB0F041C2E85BC007C1E28 /* DMRefreshFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMRefreshFooterView.swift; sourceTree = "<group>"; };
-		26DB0F051C2E85BC007C1E28 /* DMRefreshHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMRefreshHeaderView.swift; sourceTree = "<group>"; };
+		26DB0F041C2E85BC007C1E28 /* DMRefreshFooterViewDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMRefreshFooterViewDefault.swift; sourceTree = "<group>"; };
+		26DB0F051C2E85BC007C1E28 /* DMRefreshHeaderViewDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMRefreshHeaderViewDefault.swift; sourceTree = "<group>"; };
 		26DB0F061C2E85BC007C1E28 /* ScrollView+DMRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ScrollView+DMRefresh.swift"; sourceTree = "<group>"; };
 		26DB0F081C2E85BC007C1E28 /* ExtensionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionViewController.swift; sourceTree = "<group>"; };
 		26DB0F101C2E85DE007C1E28 /* DMUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMUtils.swift; sourceTree = "<group>"; };
@@ -93,8 +95,8 @@
 			isa = PBXGroup;
 			children = (
 				26DB0F031C2E85BC007C1E28 /* DMRefreshBaseView.swift */,
-				26DB0F041C2E85BC007C1E28 /* DMRefreshFooterView.swift */,
-				26DB0F051C2E85BC007C1E28 /* DMRefreshHeaderView.swift */,
+				26DB0F041C2E85BC007C1E28 /* DMRefreshFooterViewDefault.swift */,
+				26DB0F051C2E85BC007C1E28 /* DMRefreshHeaderViewDefault.swift */,
 				26DB0F061C2E85BC007C1E28 /* ScrollView+DMRefresh.swift */,
 			);
 			path = DMRefreshView;
@@ -135,6 +137,7 @@
 				26F779411C1E4B8D000D3A2F /* Assets.xcassets */,
 				26F779431C1E4B8D000D3A2F /* LaunchScreen.storyboard */,
 				26F779461C1E4B8D000D3A2F /* Info.plist */,
+				26B8160A1C2EBB730062692A /* CellTest.swift */,
 			);
 			path = UITest;
 			sourceTree = "<group>";
@@ -210,8 +213,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				26DB0F0D1C2E85BC007C1E28 /* DMRefreshHeaderView.swift in Sources */,
-				26DB0F0C1C2E85BC007C1E28 /* DMRefreshFooterView.swift in Sources */,
+				26DB0F0D1C2E85BC007C1E28 /* DMRefreshHeaderViewDefault.swift in Sources */,
+				26DB0F0C1C2E85BC007C1E28 /* DMRefreshFooterViewDefault.swift in Sources */,
 				26DB0F111C2E85DE007C1E28 /* DMUtils.swift in Sources */,
 				26DB0F0F1C2E85BC007C1E28 /* ExtensionViewController.swift in Sources */,
 				26DB0F0E1C2E85BC007C1E28 /* ScrollView+DMRefresh.swift in Sources */,
@@ -219,6 +222,7 @@
 				26F7793D1C1E4B8D000D3A2F /* ViewController.swift in Sources */,
 				26DB0F0B1C2E85BC007C1E28 /* DMRefreshBaseView.swift in Sources */,
 				26DB0F131C2E8626007C1E28 /* DMConsts.swift in Sources */,
+				26B8160B1C2EBB730062692A /* CellTest.swift in Sources */,
 				26F7793B1C1E4B8D000D3A2F /* AppDelegate.swift in Sources */,
 				26DB0F091C2E85BC007C1E28 /* DMCircleView.swift in Sources */,
 			);

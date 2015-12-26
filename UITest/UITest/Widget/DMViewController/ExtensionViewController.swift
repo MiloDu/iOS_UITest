@@ -21,8 +21,26 @@ extension ViewController {
         return 0
     }
     
+    var heightTabBar : CGFloat {
+        if(self.tabBarController != nil){
+            return self.tabBarController!.tabBar.frame.size.height
+        }
+        return 0
+    }
+
     var frameView : CGRect{
-        return CGRectMake(0, 0, self.view.frame.width, self.view.frame.height - heightStatusBar - heightNavBar)
+        var y : CGFloat = 0
+        var height : CGFloat = self.view.frame.size.height
+        if(self.navigationController == nil && self.tabBarController == nil){
+            y = heightStatusBar
+            height -= heightStatusBar
+        }else if(self.edgesForExtendedLayout == UIRectEdge.None){
+            height -= (heightStatusBar + heightNavBar + heightTabBar)
+            if(self.navigationController == nil){
+                y = heightStatusBar
+            }
+        }
+        return CGRectMake(0, y, self.view.frame.width, height)
     }
     
     var frameFull : CGRect{
