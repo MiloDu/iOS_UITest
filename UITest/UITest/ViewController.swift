@@ -62,6 +62,7 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
     //#prama RefreshDelegate
     func onRefresh(type : DMRefreshViewType){
         print("onRefresh = \(type)")
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         if(type == DMRefreshViewType.Header){
             NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "refreshHeaderEnd", userInfo: nil, repeats: false)
         }else{
@@ -71,13 +72,15 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
     
     func refreshHeaderEnd(){
         print("refreshHeaderEnd")
-        array.append(String(array.count))
-        tableView.reloadData()
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         self.tableView.endRefresh(DMRefreshViewType.Header)
     }
     
     func refreshFooterEnd(){
         print("refreshFooterEnd")
+        array.append(String(array.count))
+        tableView.reloadData()
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
         self.tableView.endRefresh(DMRefreshViewType.Footer)
     }
     

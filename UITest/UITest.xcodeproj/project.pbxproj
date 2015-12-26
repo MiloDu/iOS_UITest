@@ -131,13 +131,13 @@
 			children = (
 				26F7793A1C1E4B8D000D3A2F /* AppDelegate.swift */,
 				26F7793C1C1E4B8D000D3A2F /* ViewController.swift */,
+				26B8160A1C2EBB730062692A /* CellTest.swift */,
 				26DB0EFC1C2E85BC007C1E28 /* Util */,
 				26DB0EFD1C2E85BC007C1E28 /* Widget */,
 				26F7793E1C1E4B8D000D3A2F /* Main.storyboard */,
 				26F779411C1E4B8D000D3A2F /* Assets.xcassets */,
 				26F779431C1E4B8D000D3A2F /* LaunchScreen.storyboard */,
 				26F779461C1E4B8D000D3A2F /* Info.plist */,
-				26B8160A1C2EBB730062692A /* CellTest.swift */,
 			);
 			path = UITest;
 			sourceTree = "<group>";
