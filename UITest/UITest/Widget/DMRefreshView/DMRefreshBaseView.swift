@@ -8,40 +8,40 @@
 
 import UIKit
 
-enum RefreshState{
+enum DMRefreshState{
     case Normal             //普通
     case ReleaseToRefresh   //松开刷新
     case Refreshing         //刷新中
 }
 
-enum RefreshViewType{
+enum DMRefreshViewType{
     case Header
     case Footer
 }
 
-public protocol RefreshDelegate : NSObjectProtocol{
+public protocol DMRefreshDelegate : NSObjectProtocol{
     func onRefresh()
     func onLoad()
 }
 
-let kContentOffset = "contentOffset"
-let AnimationDuraiton = 0.2
+let kDMContentOffset = "contentOffset"
+let DMAnimationDuraiton = 0.2
 
-class RefreshBaseView: UIView {
-    static func createHeaderView(frame frame : CGRect) -> RefreshHeaderView{
-        return RefreshHeaderView(frame: frame)
+class DMRefreshBaseView: UIView {
+    static func createHeaderView(frame frame : CGRect) -> DMRefreshHeaderView{
+        return DMRefreshHeaderView(frame: frame)
     }
     
-    static func createFooterView(frame frame : CGRect) -> RefreshFooterView{
-        return RefreshFooterView(frame: frame)
+    static func createFooterView(frame frame : CGRect) -> DMRefreshFooterView{
+        return DMRefreshFooterView(frame: frame)
     }
 
     var scrollView : UIScrollView!
     var scrollViewOriginalInset : UIEdgeInsets!
     var originalHeight : CGFloat = 0
-    var state = RefreshState.Normal
+    var state = DMRefreshState.Normal
     var isRefreshing : Bool{
-        return self.state == RefreshState.Refreshing
+        return self.state == DMRefreshState.Refreshing
     }
     
     override init(frame: CGRect) {
@@ -57,11 +57,11 @@ class RefreshBaseView: UIView {
     override func willMoveToSuperview(newSuperview: UIView?) {
         super.willMoveToSuperview(newSuperview)
         if(self.superview != nil){
-            self.superview?.removeObserver(self, forKeyPath: kContentOffset)
+            self.superview?.removeObserver(self, forKeyPath: kDMContentOffset)
         }
         
         if(newSuperview != nil){
-            newSuperview?.addObserver(self, forKeyPath: kContentOffset, options: NSKeyValueObservingOptions.New, context: nil)
+            newSuperview?.addObserver(self, forKeyPath: kDMContentOffset, options: NSKeyValueObservingOptions.New, context: nil)
             newSuperview?.addObserver(self, forKeyPath: "tracking", options: NSKeyValueObservingOptions.New, context: nil)
             var rect = self.frame
             rect.size.width = (newSuperview?.frame.size.width)!
@@ -74,7 +74,7 @@ class RefreshBaseView: UIView {
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        if(keyPath == kContentOffset){
+        if(keyPath == kDMContentOffset){
             self.onContentOffsetChanged()
         }
     }
@@ -85,7 +85,7 @@ class RefreshBaseView: UIView {
     
     func beginRefresh(){
         if(self.window != nil){
-            self.state = RefreshState.Refreshing
+            self.state = DMRefreshState.Refreshing
         }
         
 //        if (self.window != nil) {
@@ -99,7 +99,7 @@ class RefreshBaseView: UIView {
     
     func endRefresh(){
         if(self.window != nil){
-            self.state = RefreshState.Normal
+            self.state = DMRefreshState.Normal
         }
         
 //        let delayInSeconds:Double = 0.3

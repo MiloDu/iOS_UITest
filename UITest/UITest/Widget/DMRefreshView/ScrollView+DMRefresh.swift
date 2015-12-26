@@ -15,27 +15,27 @@ extension UIScrollView {
         static var Footer = "Footer"
     }
     
-    var delegateRefresh: RefreshDelegate? {
+    var delegateRefresh: DMRefreshDelegate? {
         get {
-            return objc_getAssociatedObject(self, &RefreshKey.Delegate) as? RefreshDelegate
+            return objc_getAssociatedObject(self, &RefreshKey.Delegate) as? DMRefreshDelegate
         }
         set (delegate) {
             objc_setAssociatedObject(self, &RefreshKey.Delegate, delegate, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
-    var refreshHeader : RefreshHeaderView? {
+    var refreshHeader : DMRefreshHeaderView? {
         get{
-            return objc_getAssociatedObject(self, &RefreshKey.Header) as? RefreshHeaderView
+            return objc_getAssociatedObject(self, &RefreshKey.Header) as? DMRefreshHeaderView
         }
         set(view){
             objc_setAssociatedObject(self, &RefreshKey.Header, view, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
-    var refreshFooter : RefreshFooterView? {
+    var refreshFooter : DMRefreshFooterView? {
         get{
-            return objc_getAssociatedObject(self, &RefreshKey.Footer) as? RefreshFooterView
+            return objc_getAssociatedObject(self, &RefreshKey.Footer) as? DMRefreshFooterView
         }
         set(view){
             objc_setAssociatedObject(self, &RefreshKey.Footer, view, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
@@ -44,7 +44,7 @@ extension UIScrollView {
 
     
     public func addRefreshHeader(frame frame: CGRect){
-        let header = RefreshBaseView.createHeaderView(frame: frame)
+        let header = DMRefreshBaseView.createHeaderView(frame: frame)
         self.refreshHeader = header
         self.addSubview(header)
     }
@@ -61,8 +61,8 @@ extension UIScrollView {
         self.refreshHeader?.endRefresh()
     }
     
-    public func addRefreshFooter(frame :  CGRect){
-        let footer = RefreshBaseView.createFooterView(frame: frame)
+    public func addRefreshFooter(frame frame :  CGRect){
+        let footer = DMRefreshBaseView.createFooterView(frame: frame)
         self.refreshFooter = footer
         self.addSubview(footer)
     }
@@ -70,22 +70,4 @@ extension UIScrollView {
     public func removeRefreshFooter(){
         self.refreshFooter?.removeFromSuperview()
     }
-    
-    public override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesBegan(touches, withEvent: event)
-        print("===============touch began================")
-    }
-    
-    public override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        super.touchesEnded(touches, withEvent: event)
-        print("======================Touchend===================")
-    }
-    
-    public override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
-        super.touchesCancelled(touches, withEvent: event)
-        print("===========cancel==============")
-    }
-//    public override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-//        print("================move=================")
-//    }
 }

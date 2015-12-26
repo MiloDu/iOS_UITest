@@ -15,10 +15,10 @@ enum ProgressType{
     case Custom
 }
 
-class MyProgressView : UIView{
+class DMProgressView : UIView{
     private static var window : UIWindow!
-    private static var dic = Dictionary<ProgressType, MyProgressView>()
-    private static var currentView : MyProgressView!
+    private static var dic = Dictionary<ProgressType, DMProgressView>()
+    private static var currentView : DMProgressView!
     static func showHud(type : ProgressType = ProgressType.Loading, text : String = "", isTouchToDismiss : Bool = false){
         if(window == nil){
             window = UIWindow()
@@ -47,7 +47,7 @@ class MyProgressView : UIView{
                 window.addSubview(currentView)
             } else {
                 print("no cache")
-                currentView = MyProgressView(frame: window.bounds, type: type)
+                currentView = DMProgressView(frame: window.bounds, type: type)
                 dic[type] = currentView
                 window.addSubview(currentView)
             }
@@ -238,8 +238,7 @@ class MyProgressView : UIView{
 
     func onTap(){
         if(isTouchToDismiss){
-            MyProgressView.hideHud()
+            DMProgressView.hideHud()
         }
     }
-
 }

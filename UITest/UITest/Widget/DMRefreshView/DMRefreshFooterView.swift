@@ -8,12 +8,12 @@
 
 import UIKit
 
-class RefreshFooterView: RefreshBaseView {
+class DMRefreshFooterView: DMRefreshBaseView {
 
     var label : UILabel!
-    override var state : RefreshState{
+    override var state : DMRefreshState{
         didSet{
-            if(oldValue != RefreshState.Refreshing){
+            if(oldValue != DMRefreshState.Refreshing){
                 scrollViewOriginalInset = scrollView.contentInset
             }
             if(self.state == oldValue){
@@ -21,11 +21,11 @@ class RefreshFooterView: RefreshBaseView {
             }
             print("state = \(self.state)")
             switch self.state{
-            case RefreshState.Normal:
+            case DMRefreshState.Normal:
                 label.text = "下拉刷新"
-                if(oldValue == RefreshState.Refreshing){
+                if(oldValue == DMRefreshState.Refreshing){
                     //Refresh End
-                    UIView.animateWithDuration(AnimationDuraiton, animations: { () -> Void in
+                    UIView.animateWithDuration(DMAnimationDuraiton, animations: { () -> Void in
                         var contentInset = self.scrollView.contentInset
                         contentInset.top = self.scrollViewOriginalInset.top
                         self.scrollView.contentInset = contentInset
@@ -34,13 +34,13 @@ class RefreshFooterView: RefreshBaseView {
                     //Drag change
                 }
                 break
-            case RefreshState.ReleaseToRefresh:
+            case DMRefreshState.ReleaseToRefresh:
                 label.text = "松开刷新"
                 //Drag change
                 break
-            case RefreshState.Refreshing:
+            case DMRefreshState.Refreshing:
                 label.text = "刷新中..."
-                UIView.animateWithDuration(AnimationDuraiton, animations: { () -> Void in
+                UIView.animateWithDuration(DMAnimationDuraiton, animations: { () -> Void in
                     var contentInset = self.scrollView.contentInset
                     contentInset.top = self.scrollViewOriginalInset.top + self.originalHeight
                     self.scrollView.contentInset = contentInset
@@ -82,6 +82,7 @@ class RefreshFooterView: RefreshBaseView {
         var rect = self.frame
         rect.origin.y = -rect.size.height
         self.frame = rect
+        print("footer frame = \(self.frame)")
     }
     
     override func onContentOffsetChanged() {
@@ -101,21 +102,21 @@ class RefreshFooterView: RefreshBaseView {
         let offsetY = self.scrollView.contentOffset.y
         let maxOffsetY = self.scrollView.contentSize.height - (self.scrollView.frame.size.height + self.scrollViewOriginalInset.top + scrollViewOriginalInset.bottom)
         let threthold : CGFloat = 0 //标识是否显示出
-        print("dragging = \(scrollView.dragging)")
+//        print("dragging = \(scrollView.dragging)")
         if(offsetY >= threthold){
             return
         }
         if(self.scrollView.dragging){
-            if(self.state == RefreshState.Normal && offsetY < threthold - originalHeight){
+            if(self.state == DMRefreshState.Normal && offsetY < threthold - originalHeight){
                 // Normal -> ReleaseToRefresh
-                self.state = RefreshState.ReleaseToRefresh
-            }else if(self.state == RefreshState.ReleaseToRefresh && offsetY >= threthold - originalHeight){
+                self.state = DMRefreshState.ReleaseToRefresh
+            }else if(self.state == DMRefreshState.ReleaseToRefresh && offsetY >= threthold - originalHeight){
                 // ReleaseToRefresh -> Normal
-                self.state = RefreshState.Normal
+                self.state = DMRefreshState.Normal
             }
         }else{
-            if(self.state == RefreshState.ReleaseToRefresh){
-                self.state = RefreshState.Refreshing
+            if(self.state == DMRefreshState.ReleaseToRefresh){
+                self.state = DMRefreshState.Refreshing
             }
         }
     }

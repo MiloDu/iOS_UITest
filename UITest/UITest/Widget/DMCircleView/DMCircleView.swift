@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyView : UIView {
+class DMCircleView : UIView {
     let PI = CGFloat(M_PI)
     let PI_2 = CGFloat(M_PI * 0.5)
     //Center Point
