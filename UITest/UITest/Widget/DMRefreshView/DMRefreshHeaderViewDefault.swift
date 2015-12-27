@@ -9,33 +9,12 @@
 import UIKit
 
 class DMRefreshHeaderViewDefault : DMRefreshHeaderViewBase {
-    let strPullToRefresh = "下拉刷新"
-    let strRefreshing = "加载中..."
-    let strReleaseToRefresh = "松开刷新"
     var label : UILabel!
     var arrow : ArrowView!
     var activityIndicator : UIActivityIndicatorView!
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        config()
-    }
-    
-    convenience init(frame: CGRect, viewType : DMRefreshViewType) {
-        self.init(frame : frame)
-        self.viewType = viewType
-        config()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func config(){
-        if(self.subviews.count > 0){
-            return
-        }
-        
+    internal override func config(){
+        super.config()
         let width : CGFloat = 24
         let x = self.frame.size.width * 0.47
         let y = self.frame.size.height * 0.5
@@ -55,6 +34,7 @@ class DMRefreshHeaderViewDefault : DMRefreshHeaderViewBase {
     }
 
     override func onNormalFromRefreshing() {
+        super.onNormalFromRefreshing()
         label.text = strPullToRefresh
         activityIndicator.stopAnimating()
         arrow.transform = CGAffineTransformIdentity
@@ -62,12 +42,15 @@ class DMRefreshHeaderViewDefault : DMRefreshHeaderViewBase {
     }
     
     override func onNormalFromRelease() {
+        super.onNormalFromRelease()
         label.text = strPullToRefresh
         UIView.animateWithDuration(DMAnimationDuraiton) { () -> Void in
             self.arrow.transform = CGAffineTransformIdentity
         }
     }
+    
     override func onRefreshing() {
+        super.onRefreshing()
         label.text = strRefreshing
         activityIndicator.startAnimating()
         arrow.hidden = true
@@ -75,6 +58,7 @@ class DMRefreshHeaderViewDefault : DMRefreshHeaderViewBase {
     }
     
     override func onReleaseFromNormal() {
+        super.onReleaseFromNormal()
         label.text = strReleaseToRefresh
         UIView.animateWithDuration(DMAnimationDuraiton) { () -> Void in
             self.arrow.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))

@@ -17,6 +17,12 @@ enum DMRefreshState{
 enum DMRefreshViewType{
     case Header
     case Footer
+    static func fromRawValue(rawValue : Int) -> DMRefreshViewType{
+        if(rawValue == 2){
+            return .Footer
+        }
+        return .Header
+    }
 }
 
 protocol DMRefreshDelegate : NSObjectProtocol{
@@ -36,6 +42,7 @@ class DMRefreshBaseView: UIView {
         return DMRefreshFooterViewDefault(frame: frame)
     }
 
+    @IBInspectable var viewTypeRawValue : Int = 1            //用于nib文件中与ViewType对应，1 = Header, 2 = Footer
     var viewType : DMRefreshViewType = DMRefreshViewType.Header
     var scrollView : UIScrollView!
     var scrollViewOriginalInset : UIEdgeInsets!
@@ -45,16 +52,27 @@ class DMRefreshBaseView: UIView {
         return self.state == DMRefreshState.Refreshing
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        originalHeight = frame.size.height
-        //        fatalError("Please do not init this view, Use method 'createHeaderView' or 'createFooterView'")
-    }
-
+//    override init(frame: CGRect) {
+//        super.init(frame: frame)
+//        config()
+//    }
+//
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
+        self.viewType = DMRefreshViewType.fromRawValue(self.viewTypeRawValue)
+        config()
     }
-        
+    
+    init(frame: CGRect, viewType : DMRefreshViewType) {
+        super.init(frame: frame)
+        self.viewType = viewType
+        config()
+    }
+    
+    internal func config(){
+        originalHeight = frame.size.height
+    }
+    
     override func willMoveToSuperview(newSuperview: UIView?) {
         super.willMoveToSuperview(newSuperview)
         if(self.superview != nil){
@@ -120,6 +138,10 @@ class DMRefreshBaseView: UIView {
 * HeaderView的基类，具体效果在子类中实现
 */
 class DMRefreshHeaderViewBase: DMRefreshBaseView {
+    let strPullToRefresh = "下拉刷新"
+    let strRefreshing = "加载中..."
+    let strReleaseToRefresh = "松开刷新"
+    //状态改变
     override var state : DMRefreshState{
         didSet{
             if(oldValue != DMRefreshState.Refreshing){
@@ -128,6 +150,7 @@ class DMRefreshHeaderViewBase: DMRefreshBaseView {
             if(self.state == oldValue){
                 return
             }
+            print("state = \(self.state)")
             switch self.state{
             case DMRefreshState.Normal:
                 if(oldValue == DMRefreshState.Refreshing){
@@ -167,15 +190,10 @@ class DMRefreshHeaderViewBase: DMRefreshBaseView {
         }
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.viewType = DMRefreshViewType.Header
+    convenience init(frame: CGRect) {
+        self.init(frame: frame, viewType: DMRefreshViewType.Header)
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+
     override func willMoveToSuperview(newSuperview: UIView?) {
         super.willMoveToSuperview(newSuperview)
         adjustFrame()
@@ -226,6 +244,9 @@ class DMRefreshHeaderViewBase: DMRefreshBaseView {
 *FooterView的基类，具体效果在子类中实现
 */
 class DMRefreshFooterViewBase: DMRefreshBaseView {
+    let strPullToRefresh = "上拉加载"
+    let strRefreshing = "加载中..."
+    let strReleaseToRefresh = "松开加载"
         override var state : DMRefreshState{
         didSet{
             if(oldValue != DMRefreshState.Refreshing){
@@ -234,7 +255,6 @@ class DMRefreshFooterViewBase: DMRefreshBaseView {
             if(self.state == oldValue){
                 return
             }
-            print("state = \(self.state)")
             switch self.state{
             case DMRefreshState.Normal:
                 if(oldValue == DMRefreshState.Refreshing){
@@ -275,15 +295,10 @@ class DMRefreshFooterViewBase: DMRefreshBaseView {
         }
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.viewType = DMRefreshViewType.Footer
+    convenience init(frame: CGRect) {
+        self.init(frame: frame, viewType: DMRefreshViewType.Footer)
     }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+
     override func willMoveToSuperview(newSuperview: UIView?) {
         super.willMoveToSuperview(newSuperview)
         adjustFrame()
@@ -310,7 +325,7 @@ class DMRefreshFooterViewBase: DMRefreshBaseView {
         }
     }
     
-    internal func onContentSizeChanged(){
+    private func onContentSizeChanged(){
         adjustFrame()
     }
     

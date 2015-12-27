@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26650A8F1C2F7C0200F132BA /* DMRefreshHeaderViewBounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26650A8E1C2F7C0200F132BA /* DMRefreshHeaderViewBounce.swift */; };
 		26B8160B1C2EBB730062692A /* CellTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B8160A1C2EBB730062692A /* CellTest.swift */; };
 		26DB0F091C2E85BC007C1E28 /* DMCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0EFF1C2E85BC007C1E28 /* DMCircleView.swift */; };
 		26DB0F0A1C2E85BC007C1E28 /* DMProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0F011C2E85BC007C1E28 /* DMProgressView.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		26650A8E1C2F7C0200F132BA /* DMRefreshHeaderViewBounce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMRefreshHeaderViewBounce.swift; sourceTree = "<group>"; };
 		26B8160A1C2EBB730062692A /* CellTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellTest.swift; sourceTree = "<group>"; };
 		26DB0EFF1C2E85BC007C1E28 /* DMCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMCircleView.swift; sourceTree = "<group>"; };
 		26DB0F011C2E85BC007C1E28 /* DMProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMProgressView.swift; sourceTree = "<group>"; };
@@ -95,8 +97,9 @@
 			isa = PBXGroup;
 			children = (
 				26DB0F031C2E85BC007C1E28 /* DMRefreshBaseView.swift */,
-				26DB0F041C2E85BC007C1E28 /* DMRefreshFooterViewDefault.swift */,
 				26DB0F051C2E85BC007C1E28 /* DMRefreshHeaderViewDefault.swift */,
+				26650A8E1C2F7C0200F132BA /* DMRefreshHeaderViewBounce.swift */,
+				26DB0F041C2E85BC007C1E28 /* DMRefreshFooterViewDefault.swift */,
 				26DB0F061C2E85BC007C1E28 /* ScrollView+DMRefresh.swift */,
 			);
 			path = DMRefreshView;
@@ -214,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				26DB0F0D1C2E85BC007C1E28 /* DMRefreshHeaderViewDefault.swift in Sources */,
+				26650A8F1C2F7C0200F132BA /* DMRefreshHeaderViewBounce.swift in Sources */,
 				26DB0F0C1C2E85BC007C1E28 /* DMRefreshFooterViewDefault.swift in Sources */,
 				26DB0F111C2E85DE007C1E28 /* DMUtils.swift in Sources */,
 				26DB0F0F1C2E85BC007C1E28 /* ExtensionViewController.swift in Sources */,
