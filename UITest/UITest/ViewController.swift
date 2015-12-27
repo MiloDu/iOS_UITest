@@ -49,6 +49,17 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         imageView.addGestureRecognizer(tapRecognizer)
 //        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTap"))
         self.view.addSubview(imageView)
+//        imageView.layer.shadowOpacity = 1
+        print("shadowOpacity = \(imageView.layer.shadowOpacity)")
+        
+        let layer = CALayer()
+        layer.frame = CGRectMake(-10, -10, imageView.width + 20, imageView.height + 20)
+//        layer.shadowColor = UIColor.blackColor().CGColor
+//        layer.shadowOffset = CGSizeMake(3, 1)
+        layer.shadowOpacity = 1
+//        layer.borderColor = UIColor.greenColor().CGColor
+//        layer.borderWidth = 1
+        imageView.layer.insertSublayer(layer, atIndex: 0)
     }
     
     func onTap(recognizer : UITapGestureRecognizer){
