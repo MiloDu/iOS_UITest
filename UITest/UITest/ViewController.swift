@@ -59,6 +59,9 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         }
     }
     
+    @IBAction func onRefreshClicked(sender: UIBarButtonItem) {
+        tableView.beginRefresh()
+    }
     //#prama RefreshDelegate
     func onRefresh(type : DMRefreshViewType){
         print("onRefresh = \(type)")

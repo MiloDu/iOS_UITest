@@ -150,7 +150,6 @@ class DMRefreshHeaderViewBase: DMRefreshBaseView {
             if(self.state == oldValue){
                 return
             }
-            print("state = \(self.state)")
             switch self.state{
             case DMRefreshState.Normal:
                 if(oldValue == DMRefreshState.Refreshing){
