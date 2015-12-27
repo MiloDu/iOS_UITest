@@ -81,8 +81,8 @@ class DMProgressView : UIView{
     let sWidth : CGFloat = UIScreen.mainScreen().bounds.width
     let sHeight : CGFloat = UIScreen.mainScreen().bounds.height
     
-    let width : CGFloat = 120
-    let height :CGFloat = 120
+    let B_WIDTH : CGFloat = 120
+    let B_HEIGHT :CGFloat = 120
     var centerFrame : CGRect!
     
     @IBInspectable var isTouchToDismiss = false
@@ -118,7 +118,7 @@ class DMProgressView : UIView{
         self.backgroundColor = UIColor.clearColor()
         let tapRecognizer = UITapGestureRecognizer(target: self, action: "onTap")
         self.addGestureRecognizer(tapRecognizer)
-        centerFrame = CGRectMake(sWidth * 0.5 - width * 0.5, sHeight * 0.5 - height * 0.5, width, height)
+        centerFrame = CGRectMake(sWidth * 0.5 - B_WIDTH * 0.5, sHeight * 0.5 - B_HEIGHT * 0.5, B_WIDTH, B_HEIGHT)
         
         switch self.type{
         case .Loading:
@@ -158,6 +158,7 @@ class DMProgressView : UIView{
         path.moveToPoint(CGPoint(x: center.x - 35, y: center.y - 5))
         path.addLineToPoint(CGPoint(x: center.x - 5, y: center.y + 35))
         path.addLineToPoint(CGPoint(x: center.x + 40, y: center.y - 35))
+        shapeLayer = CAShapeLayer()
         configShapeLayer()
         shapeLayer.path = path.CGPath
         self.layer.addSublayer(shapeLayer)
@@ -171,6 +172,7 @@ class DMProgressView : UIView{
         path.addLineToPoint(CGPoint(x: center.x + l, y: center.y + l))
         path.moveToPoint(CGPoint(x: center.x + l, y: center.y - l))
         path.addLineToPoint(CGPoint(x: center.x - l, y: center.y + l))
+        shapeLayer = CAShapeLayer()
         configShapeLayer()
         shapeLayer.path = path.CGPath
         self.layer.addSublayer(shapeLayer)
@@ -179,8 +181,8 @@ class DMProgressView : UIView{
     private func configCustom(){
         let path = DMPathUtils.pathDollar(centerFrame)
         shapeLayer = CAShapeLayer()
-        shapeLayer.path = path.CGPath
         configShapeLayer()
+        shapeLayer.path = path.CGPath
         self.layer.addSublayer(shapeLayer)
     }
     

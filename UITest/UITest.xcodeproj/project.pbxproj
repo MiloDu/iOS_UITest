@@ -11,7 +11,8 @@
 		26650A911C2F96CE00F132BA /* ExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26650A901C2F96CE00F132BA /* ExtensionViewController.swift */; };
 		26650A931C2F971800F132BA /* DMLayerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26650A921C2F971800F132BA /* DMLayerUtils.swift */; };
 		26650A951C2F972900F132BA /* DMPathUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26650A941C2F972900F132BA /* DMPathUtils.swift */; };
-		26650A971C2F99EF00F132BA /* DMAnimationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26650A961C2F99EF00F132BA /* DMAnimationUtils.swift */; };
+		2669F11E1C2FE2570002DF14 /* DMAnimationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2669F11D1C2FE2570002DF14 /* DMAnimationUtils.swift */; };
+		2669F1201C2FE3080002DF14 /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2669F11F1C2FE3080002DF14 /* ExtensionUIView.swift */; };
 		26B8160B1C2EBB730062692A /* CellTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B8160A1C2EBB730062692A /* CellTest.swift */; };
 		26DB0F091C2E85BC007C1E28 /* DMCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0EFF1C2E85BC007C1E28 /* DMCircleView.swift */; };
 		26DB0F0A1C2E85BC007C1E28 /* DMProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0F011C2E85BC007C1E28 /* DMProgressView.swift */; };
@@ -33,7 +34,8 @@
 		26650A901C2F96CE00F132BA /* ExtensionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionViewController.swift; sourceTree = "<group>"; };
 		26650A921C2F971800F132BA /* DMLayerUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMLayerUtils.swift; sourceTree = "<group>"; };
 		26650A941C2F972900F132BA /* DMPathUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMPathUtils.swift; sourceTree = "<group>"; };
-		26650A961C2F99EF00F132BA /* DMAnimationUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMAnimationUtils.swift; sourceTree = "<group>"; };
+		2669F11D1C2FE2570002DF14 /* DMAnimationUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMAnimationUtils.swift; sourceTree = "<group>"; };
+		2669F11F1C2FE3080002DF14 /* ExtensionUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIView.swift; sourceTree = "<group>"; };
 		26B8160A1C2EBB730062692A /* CellTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellTest.swift; sourceTree = "<group>"; };
 		26DB0EFF1C2E85BC007C1E28 /* DMCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMCircleView.swift; sourceTree = "<group>"; };
 		26DB0F011C2E85BC007C1E28 /* DMProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMProgressView.swift; sourceTree = "<group>"; };
@@ -68,7 +70,6 @@
 			children = (
 				26DB0F101C2E85DE007C1E28 /* DMUtils.swift */,
 				26DB0F121C2E8626007C1E28 /* DMConsts.swift */,
-				26650A961C2F99EF00F132BA /* DMAnimationUtils.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -77,8 +78,10 @@
 			isa = PBXGroup;
 			children = (
 				26650A901C2F96CE00F132BA /* ExtensionViewController.swift */,
+				2669F11F1C2FE3080002DF14 /* ExtensionUIView.swift */,
 				26650A921C2F971800F132BA /* DMLayerUtils.swift */,
 				26650A941C2F972900F132BA /* DMPathUtils.swift */,
+				2669F11D1C2FE2570002DF14 /* DMAnimationUtils.swift */,
 				26DB0EFE1C2E85BC007C1E28 /* DMCircleView */,
 				26DB0F001C2E85BC007C1E28 /* DMProgressView */,
 				26DB0F021C2E85BC007C1E28 /* DMRefreshView */,
@@ -220,9 +223,10 @@
 				26DB0F0D1C2E85BC007C1E28 /* DMRefreshHeaderViewDefault.swift in Sources */,
 				26650A8F1C2F7C0200F132BA /* DMRefreshHeaderViewBounce.swift in Sources */,
 				26DB0F0C1C2E85BC007C1E28 /* DMRefreshFooterViewDefault.swift in Sources */,
-				26650A971C2F99EF00F132BA /* DMAnimationUtils.swift in Sources */,
+				2669F11E1C2FE2570002DF14 /* DMAnimationUtils.swift in Sources */,
 				26DB0F111C2E85DE007C1E28 /* DMUtils.swift in Sources */,
 				26DB0F0E1C2E85BC007C1E28 /* ScrollView+DMRefresh.swift in Sources */,
+				2669F1201C2FE3080002DF14 /* ExtensionUIView.swift in Sources */,
 				26650A931C2F971800F132BA /* DMLayerUtils.swift in Sources */,
 				26DB0F0A1C2E85BC007C1E28 /* DMProgressView.swift in Sources */,
 				26F7793D1C1E4B8D000D3A2F /* ViewController.swift in Sources */,

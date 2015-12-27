@@ -23,12 +23,44 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         
 //        testCircleView()
 //        testRefresh()
-        
+        test3D()
     }
     
     func testCircleView(){
         circleView = DMCircleView(frame: CGRectMake(40,100,240,240))
         self.view.addSubview(circleView)
+    }
+    
+    func test3D(){
+        let image = UIImage(named: "image")!
+        let imageView = UIImageView(frame: CGRectMake(0, 200, image.size.width + 100, image.size.height))
+        imageView.layer.backgroundColor = UIColor.greenColor().CGColor
+        imageView.backgroundColor = UIColor.redColor()
+        imageView.contentMode = UIViewContentMode.Center
+        imageView.image = image
+        imageView.layer.anchorPoint = CGPointMake(0.5, 0)
+        var frame = imageView.frame
+        frame.origin.y -= frame.size.height * 0.5
+        imageView.frame = frame
+
+        imageView.tag = 100
+        imageView.userInteractionEnabled = true
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: "onTap:")
+        imageView.addGestureRecognizer(tapRecognizer)
+//        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTap"))
+        self.view.addSubview(imageView)
+    }
+    
+    func onTap(recognizer : UITapGestureRecognizer){
+        print("onTap")
+        UIView.animateWithDuration(10) { () -> Void in
+            let view = self.view.viewWithTag(100)!
+            let rotationT = CATransform3DRotate(view.layer.transform, DMConsts.PI, 1, 0, 0)
+            //        imageView.layer.transform = rotationT
+            let rotationPers = DMLayerUtils.CATransform3DPerspective(rotationT)
+            //        imageView.layer.zPosition = 100
+            view.layer.transform = rotationPers
+        }
     }
     
     func testRefresh(){
