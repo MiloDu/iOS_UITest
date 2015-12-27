@@ -37,6 +37,7 @@ class DMRefreshHeaderViewBounce : DMRefreshHeaderViewBase {
         self.addSubview(label)
     }
 
+    
     override func onNormalFromRefreshing() {
         label.text = strPullToRefresh
         activityIndicator.stopAnimating()

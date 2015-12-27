@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		26650A8F1C2F7C0200F132BA /* DMRefreshHeaderViewBounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26650A8E1C2F7C0200F132BA /* DMRefreshHeaderViewBounce.swift */; };
+		26650A911C2F96CE00F132BA /* ExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26650A901C2F96CE00F132BA /* ExtensionViewController.swift */; };
+		26650A931C2F971800F132BA /* DMLayerUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26650A921C2F971800F132BA /* DMLayerUtils.swift */; };
+		26650A951C2F972900F132BA /* DMPathUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26650A941C2F972900F132BA /* DMPathUtils.swift */; };
+		26650A971C2F99EF00F132BA /* DMAnimationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26650A961C2F99EF00F132BA /* DMAnimationUtils.swift */; };
 		26B8160B1C2EBB730062692A /* CellTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B8160A1C2EBB730062692A /* CellTest.swift */; };
 		26DB0F091C2E85BC007C1E28 /* DMCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0EFF1C2E85BC007C1E28 /* DMCircleView.swift */; };
 		26DB0F0A1C2E85BC007C1E28 /* DMProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0F011C2E85BC007C1E28 /* DMProgressView.swift */; };
@@ -15,7 +19,6 @@
 		26DB0F0C1C2E85BC007C1E28 /* DMRefreshFooterViewDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0F041C2E85BC007C1E28 /* DMRefreshFooterViewDefault.swift */; };
 		26DB0F0D1C2E85BC007C1E28 /* DMRefreshHeaderViewDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0F051C2E85BC007C1E28 /* DMRefreshHeaderViewDefault.swift */; };
 		26DB0F0E1C2E85BC007C1E28 /* ScrollView+DMRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0F061C2E85BC007C1E28 /* ScrollView+DMRefresh.swift */; };
-		26DB0F0F1C2E85BC007C1E28 /* ExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0F081C2E85BC007C1E28 /* ExtensionViewController.swift */; };
 		26DB0F111C2E85DE007C1E28 /* DMUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0F101C2E85DE007C1E28 /* DMUtils.swift */; };
 		26DB0F131C2E8626007C1E28 /* DMConsts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0F121C2E8626007C1E28 /* DMConsts.swift */; };
 		26F7793B1C1E4B8D000D3A2F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F7793A1C1E4B8D000D3A2F /* AppDelegate.swift */; };
@@ -27,6 +30,10 @@
 
 /* Begin PBXFileReference section */
 		26650A8E1C2F7C0200F132BA /* DMRefreshHeaderViewBounce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMRefreshHeaderViewBounce.swift; sourceTree = "<group>"; };
+		26650A901C2F96CE00F132BA /* ExtensionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionViewController.swift; sourceTree = "<group>"; };
+		26650A921C2F971800F132BA /* DMLayerUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMLayerUtils.swift; sourceTree = "<group>"; };
+		26650A941C2F972900F132BA /* DMPathUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMPathUtils.swift; sourceTree = "<group>"; };
+		26650A961C2F99EF00F132BA /* DMAnimationUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMAnimationUtils.swift; sourceTree = "<group>"; };
 		26B8160A1C2EBB730062692A /* CellTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellTest.swift; sourceTree = "<group>"; };
 		26DB0EFF1C2E85BC007C1E28 /* DMCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMCircleView.swift; sourceTree = "<group>"; };
 		26DB0F011C2E85BC007C1E28 /* DMProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMProgressView.swift; sourceTree = "<group>"; };
@@ -34,7 +41,6 @@
 		26DB0F041C2E85BC007C1E28 /* DMRefreshFooterViewDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMRefreshFooterViewDefault.swift; sourceTree = "<group>"; };
 		26DB0F051C2E85BC007C1E28 /* DMRefreshHeaderViewDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMRefreshHeaderViewDefault.swift; sourceTree = "<group>"; };
 		26DB0F061C2E85BC007C1E28 /* ScrollView+DMRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ScrollView+DMRefresh.swift"; sourceTree = "<group>"; };
-		26DB0F081C2E85BC007C1E28 /* ExtensionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionViewController.swift; sourceTree = "<group>"; };
 		26DB0F101C2E85DE007C1E28 /* DMUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMUtils.swift; sourceTree = "<group>"; };
 		26DB0F121C2E8626007C1E28 /* DMConsts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMConsts.swift; sourceTree = "<group>"; };
 		26F779371C1E4B8D000D3A2F /* UITest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UITest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -62,6 +68,7 @@
 			children = (
 				26DB0F101C2E85DE007C1E28 /* DMUtils.swift */,
 				26DB0F121C2E8626007C1E28 /* DMConsts.swift */,
+				26650A961C2F99EF00F132BA /* DMAnimationUtils.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -69,10 +76,12 @@
 		26DB0EFD1C2E85BC007C1E28 /* Widget */ = {
 			isa = PBXGroup;
 			children = (
+				26650A901C2F96CE00F132BA /* ExtensionViewController.swift */,
+				26650A921C2F971800F132BA /* DMLayerUtils.swift */,
+				26650A941C2F972900F132BA /* DMPathUtils.swift */,
 				26DB0EFE1C2E85BC007C1E28 /* DMCircleView */,
 				26DB0F001C2E85BC007C1E28 /* DMProgressView */,
 				26DB0F021C2E85BC007C1E28 /* DMRefreshView */,
-				26DB0F071C2E85BC007C1E28 /* DMViewController */,
 			);
 			path = Widget;
 			sourceTree = "<group>";
@@ -103,14 +112,6 @@
 				26DB0F061C2E85BC007C1E28 /* ScrollView+DMRefresh.swift */,
 			);
 			path = DMRefreshView;
-			sourceTree = "<group>";
-		};
-		26DB0F071C2E85BC007C1E28 /* DMViewController */ = {
-			isa = PBXGroup;
-			children = (
-				26DB0F081C2E85BC007C1E28 /* ExtensionViewController.swift */,
-			);
-			path = DMViewController;
 			sourceTree = "<group>";
 		};
 		26F7792E1C1E4B8D000D3A2F = {
@@ -219,15 +220,18 @@
 				26DB0F0D1C2E85BC007C1E28 /* DMRefreshHeaderViewDefault.swift in Sources */,
 				26650A8F1C2F7C0200F132BA /* DMRefreshHeaderViewBounce.swift in Sources */,
 				26DB0F0C1C2E85BC007C1E28 /* DMRefreshFooterViewDefault.swift in Sources */,
+				26650A971C2F99EF00F132BA /* DMAnimationUtils.swift in Sources */,
 				26DB0F111C2E85DE007C1E28 /* DMUtils.swift in Sources */,
-				26DB0F0F1C2E85BC007C1E28 /* ExtensionViewController.swift in Sources */,
 				26DB0F0E1C2E85BC007C1E28 /* ScrollView+DMRefresh.swift in Sources */,
+				26650A931C2F971800F132BA /* DMLayerUtils.swift in Sources */,
 				26DB0F0A1C2E85BC007C1E28 /* DMProgressView.swift in Sources */,
 				26F7793D1C1E4B8D000D3A2F /* ViewController.swift in Sources */,
 				26DB0F0B1C2E85BC007C1E28 /* DMRefreshBaseView.swift in Sources */,
+				26650A951C2F972900F132BA /* DMPathUtils.swift in Sources */,
 				26DB0F131C2E8626007C1E28 /* DMConsts.swift in Sources */,
 				26B8160B1C2EBB730062692A /* CellTest.swift in Sources */,
 				26F7793B1C1E4B8D000D3A2F /* AppDelegate.swift in Sources */,
+				26650A911C2F96CE00F132BA /* ExtensionViewController.swift in Sources */,
 				26DB0F091C2E85BC007C1E28 /* DMCircleView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

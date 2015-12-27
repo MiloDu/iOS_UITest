@@ -22,7 +22,7 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         self.edgesForExtendedLayout = UIRectEdge.None
         
 //        testCircleView()
-        testRefresh()
+//        testRefresh()
         
     }
     
