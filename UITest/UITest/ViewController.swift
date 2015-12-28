@@ -17,13 +17,16 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
     let kCell = "Cell"
     var tableView : UITableView!
     var array = Array<String>()
+    
+    var count = 4
     override func viewDidLoad() {
         super.viewDidLoad()
         self.edgesForExtendedLayout = UIRectEdge.None
         
 //        testCircleView()
-        testRefresh()
+//        testRefresh()
 //        test3D()
+        testChartView()
     }
     
     func testCircleView(){
@@ -62,18 +65,6 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         imageView.layer.insertSublayer(layer, atIndex: 0)
     }
     
-    func onTap(recognizer : UITapGestureRecognizer){
-        print("onTap")
-        UIView.animateWithDuration(10) { () -> Void in
-            let view = self.view.viewWithTag(100)!
-            let rotationT = CATransform3DRotate(view.layer.transform, DMConsts.PI, 1, 0, 0)
-            //        imageView.layer.transform = rotationT
-            let rotationPers = DMLayerUtils.CATransform3DPerspective(rotationT)
-            //        imageView.layer.zPosition = 100
-            view.layer.transform = rotationPers
-        }
-    }
-    
     func testRefresh(){
         for i in 0 ..< 5 {
             array.append(String(i))
@@ -90,6 +81,55 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         print("table = \(tableView.frame)")
     }
     
+    func testChartView(){
+        let chartAxesView =  DMChartView.createBarView(frame: CGRectMake(0,50,self.view.width,300))
+        chartAxesView.backgroundColor = UIColor.cyanColor()
+        chartAxesView.tag = 200
+        self.view.addSubview(chartAxesView)
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: "onTap:")
+        chartAxesView.addGestureRecognizer(tapRecognizer)
+        
+        chartAxesView.labelForXAxes = {(label: UILabel, index : Int)->Void in
+            label.text = "第\(index)个"
+        }
+        chartAxesView.labelForYAxes = {(label: UILabel, index : Int, isMax : Bool)->Void in
+            label.textColor = UIColor.yellowColor()
+        }
+        configChartData(chartAxesView, count: 5, maxValue: 10)
+    }
+    
+    private func configChartData(chartView: DMChartBarView, count : Int, maxValue : CGFloat){
+        chartView.arrayXString.removeAll()
+        chartView.arrayData.removeAll()
+        for i in 0 ..< count{
+            chartView.arrayXString.append(String(i))
+            
+            let item = DMDataItem()
+            item.value = CGFloat(i)
+            chartView.arrayData.append(item)
+        }
+        chartView.valueMax = maxValue
+        chartView.valueInterval = maxValue / CGFloat(count)
+    }
+    
+    func onTap(recognizer : UITapGestureRecognizer){
+        print("onTap = \(recognizer.view?.tag)")
+        if(recognizer.view?.tag == 100){
+            UIView.animateWithDuration(10) { () -> Void in
+                let view = self.view.viewWithTag(100)!
+                let rotationT = CATransform3DRotate(view.layer.transform, DMConsts.PI, 1, 0, 0)
+                //        imageView.layer.transform = rotationT
+                let rotationPers = DMLayerUtils.CATransform3DPerspective(rotationT)
+                //        imageView.layer.zPosition = 100
+                view.layer.transform = rotationPers
+            }
+        }else if(recognizer.view?.tag == 200){
+            let view = self.view.viewWithTag(200) as! DMChartBarView
+            configChartData(view, count: count++, maxValue: 40)
+            view.setNeedsDisplay()
+        }
+    }
+
     @IBAction func onButtonClicked(sender: UIButton) {
         print("onbutton clicked")
         if(sender.tag == 1){

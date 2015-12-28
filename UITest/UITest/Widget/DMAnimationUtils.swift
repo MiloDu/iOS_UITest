@@ -10,7 +10,7 @@ import UIKit
 
 class DMAnimationUtils: NSObject {
     static let kAnimStroekEnd = "strokeEnd"
-    static func animStrokeEnd(duration : NSTimeInterval) -> CABasicAnimation{
+    static func createAnimStrokeEnd(duration : NSTimeInterval) -> CABasicAnimation{
         let animStrokeEnd = CABasicAnimation(keyPath: kAnimStroekEnd)
         animStrokeEnd.duration = duration
         animStrokeEnd.fromValue = 0.0
