@@ -54,22 +54,27 @@ class DMChartBarView: DMChartAxesView {
     }
     
     private func drawText(width : CGFloat){
-//        for i in 0 ..< arrayData
-//        let layerText : CATextLayer!
-//        if(index < _arrayLayerText.count){
-//            layerText = _arrayLayerText[index]
-//        }else{
-//            layerText = CATextLayer()
-//            self.layer.addSublayer(layerText)
-//            _arrayLayerText.append(layerText)
-//            
-//            layerText.fontSize = 12
-//            layerText.contentsScale = UIScreen.mainScreen().scale
-//            layerText.alignmentMode = kCAAlignmentCenter
-//            layerText.foregroundColor = colorBar.CGColor
-//        }
-//        layerText.frame = CGRectMake(self.arrayPoint[index].x - width * 0.5, self.arrayPoint[index].y - 20, width, 20)
-//        layerText.string = String(self.arrayData[index].value / self.valueMax)
+        weak var weakself = self
+        DMCacheUtils.cacheFromArray(_arrayLayerText, count: arrayData.count) {(var layer, index) -> Void in
+            if(index < weakself?.arrayData.count){
+                if(layer == nil){
+                    layer = CATextLayer()
+                    weakself?.layer.addSublayer(layer)
+                    weakself?._arrayLayerText.append(layer)
+                    
+                    layer.fontSize = 12
+                    layer.contentsScale = UIScreen.mainScreen().scale
+                    layer.alignmentMode = kCAAlignmentCenter
+                    layer.foregroundColor = weakself?.colorBar.CGColor
+                }else{
+                    layer.hidden = false
+                }
+                layer.frame = CGRectMake( weakself!.arrayPoint[index].x - width * 0.5, weakself!.arrayPoint[index].y - 20, width, 20)
+                layer.string = String( weakself!.arrayData[index].value / weakself!.valueMax)
+            }else{
+                layer.hidden = true
+            }
+        }
     }
     
     private func createPath(isBackground : Bool) -> UIBezierPath {

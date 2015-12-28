@@ -45,7 +45,7 @@ class DMRefreshFooterViewDefault: DMRefreshFooterViewBase {
     override func onNormalFromRelease() {
         super.onNormalFromRelease()
         label.text = strPullToRefresh
-        UIView.animateWithDuration(DMAnimationDuraiton) { () -> Void in
+        UIView.animateWithDuration(animationDuraiton) { () -> Void in
             self.arrow.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
         }
     }
@@ -60,7 +60,7 @@ class DMRefreshFooterViewDefault: DMRefreshFooterViewBase {
     override func onReleaseFromNormal() {
         super.onReleaseFromNormal()
         label.text = strReleaseToRefresh
-        UIView.animateWithDuration(DMAnimationDuraiton) { () -> Void in
+        UIView.animateWithDuration(animationDuraiton) { () -> Void in
             self.arrow.transform = CGAffineTransformIdentity
         }
     }

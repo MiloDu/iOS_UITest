@@ -26,7 +26,7 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
 //        testCircleView()
 //        testRefresh()
 //        test3D()
-        testChartView()
+//        testChartView()
     }
     
     func testCircleView(){
@@ -119,13 +119,16 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
                 let view = self.view.viewWithTag(100)!
                 let rotationT = CATransform3DRotate(view.layer.transform, DMConsts.PI, 1, 0, 0)
                 //        imageView.layer.transform = rotationT
-                let rotationPers = DMLayerUtils.CATransform3DPerspective(rotationT)
+                let rotationPers = DMAnimationUtils.CATransform3DPerspective(rotationT)
                 //        imageView.layer.zPosition = 100
                 view.layer.transform = rotationPers
             }
         }else if(recognizer.view?.tag == 200){
             let view = self.view.viewWithTag(200) as! DMChartBarView
             configChartData(view, count: count++, maxValue: 40)
+            if(view.arrayXString.count >= 10){
+                count = 2
+            }
             view.setNeedsDisplay()
         }
     }
