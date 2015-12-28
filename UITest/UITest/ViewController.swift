@@ -8,131 +8,137 @@
 
 import UIKit
 
-class ViewController: UIViewController, RefreshDelegate,UITableViewDelegate {
-
-    var circleView : MyView!
+class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate {
+    let WIDTH_SCREEN = UIScreen.mainScreen().bounds.size.width
+    let HEIGHT_SCREEN = UIScreen.mainScreen().bounds.size.height
+    
+    var circleView : DMCircleView!
+    
+    let kCell = "Cell"
     var tableView : UITableView!
+    var array = Array<String>()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.edgesForExtendedLayout = UIRectEdge.None
-        self.extendedLayoutIncludesOpaqueBars = false
-        self.modalPresentationCapturesStatusBarAppearance = false
-        let width = UIScreen.mainScreen().bounds.size.width
-        let margin : CGFloat = 40
-        circleView = MyView(frame: CGRectMake(margin,100, width - margin * 2,width - margin * 2))
-        self.view.addSubview(circleView)
-        tableView = UITableView(frame: self.view.bounds)
         
-        tableView.delegateRefresh = self
-        tableView.delegate = self
-        tableView.addRefreshHeader(frame: CGRectMake(0 , 0, 320, 64))
-        tableView.addRefreshFooter(frame:CGRectMake(0,0,320,64))
+//        testCircleView()
+        testRefresh()
+//        test3D()
+    }
+    
+    func testCircleView(){
+        circleView = DMCircleView(frame: CGRectMake(40,100,240,240))
+        self.view.addSubview(circleView)
+    }
+    
+    func test3D(){
+        let image = UIImage(named: "image")!
+        let imageView = UIImageView(frame: CGRectMake(0, 200, image.size.width + 100, image.size.height))
+        imageView.layer.backgroundColor = UIColor.greenColor().CGColor
+        imageView.backgroundColor = UIColor.redColor()
+        imageView.contentMode = UIViewContentMode.Center
+        imageView.image = image
+        imageView.layer.anchorPoint = CGPointMake(0.5, 0)
+        var frame = imageView.frame
+        frame.origin.y -= frame.size.height * 0.5
+        imageView.frame = frame
+
+        imageView.tag = 100
+        imageView.userInteractionEnabled = true
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: "onTap:")
+        imageView.addGestureRecognizer(tapRecognizer)
+//        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: "onTap"))
+        self.view.addSubview(imageView)
+//        imageView.layer.shadowOpacity = 1
+        print("shadowOpacity = \(imageView.layer.shadowOpacity)")
+        
+        let layer = CALayer()
+        layer.frame = CGRectMake(-10, -10, imageView.width + 20, imageView.height + 20)
+//        layer.shadowColor = UIColor.blackColor().CGColor
+//        layer.shadowOffset = CGSizeMake(3, 1)
+        layer.shadowOpacity = 1
+//        layer.borderColor = UIColor.greenColor().CGColor
+//        layer.borderWidth = 1
+        imageView.layer.insertSublayer(layer, atIndex: 0)
+    }
+    
+    func onTap(recognizer : UITapGestureRecognizer){
+        print("onTap")
+        UIView.animateWithDuration(10) { () -> Void in
+            let view = self.view.viewWithTag(100)!
+            let rotationT = CATransform3DRotate(view.layer.transform, DMConsts.PI, 1, 0, 0)
+            //        imageView.layer.transform = rotationT
+            let rotationPers = DMLayerUtils.CATransform3DPerspective(rotationT)
+            //        imageView.layer.zPosition = 100
+            view.layer.transform = rotationPers
+        }
+    }
+    
+    func testRefresh(){
+        for i in 0 ..< 5 {
+            array.append(String(i))
+        }
+        tableView = UITableView(frame: frameView)
+        tableView.registerClass(CellTest.self, forCellReuseIdentifier: kCell)
+        tableView.tableFooterView = UIView() //隐藏无效的分割线
+        tableView.dataSource = self
         self.view.addSubview(tableView)
+        
+        tableView.addRefreshHeader(frame: CGRectMake(0 , 0, 320, 64))
+        tableView.addRefreshFooter(frame : CGRectMake(0,0,320,64))
+        tableView.delegateRefresh = self
+        print("table = \(tableView.frame)")
     }
     
-    func generateAnim() -> CABasicAnimation{
-        //        CATransaction.begin()
-        let anim = CABasicAnimation(keyPath: "opacity")
-        anim.duration = 5
-        anim.fromValue = 0
-        anim.toValue = 1
-        //        CATransaction.commit()
-        return anim
-    }
-    
-    func generateAnim2() -> CABasicAnimation{
-        CATransaction.begin()
-        let anim = CABasicAnimation(keyPath: "position")
-        anim.duration = 5
-        anim.fromValue = NSValue(CGPoint: CGPointMake(0, 0))
-        anim.toValue = NSValue(CGPoint: CGPointMake(20, 60))
-        CATransaction.commit()
-        return anim
-    }
     @IBAction func onButtonClicked(sender: UIButton) {
         print("onbutton clicked")
-//        if(circleView.progress >= 0.9){
-//            circleView.progress -= 0.1
-//        }else{
-//            circleView.progress += 0.1
-//        }
         if(sender.tag == 1){
             showHudLoading()
         }else if(sender.tag == 2){
             showHudOK()
         }else if(sender.tag == 3){
-            showHudError()
+//            showHudError()
+            showHudCustom()
         }
     }
     
+    @IBAction func onRefreshClicked(sender: UIBarButtonItem) {
+        tableView.beginRefresh()
+    }
+
     //#prama RefreshDelegate
-    func onRefresh(){
-        print("onRefresh")
-        NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "refreshEnd", userInfo: nil, repeats: false)
-    }
-    func onLoad(){
-        
-    }
-    
-    func refreshEnd(){
-        self.tableView.endRefresh()
-    }
-
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        print("offset = \(scrollView.contentOffset.y)")
-        print("inset  =\(scrollView.contentInset.top)")
-    }
-}
-
-
-var AssociatedObjectHandle : UInt8 = 0
-
-extension UIViewController{
-    
-    var hudView : MyProgressView?{
-        get{
-            return objc_getAssociatedObject(self, &AssociatedObjectHandle) as? MyProgressView
-        }
-        set{
-            objc_setAssociatedObject(self, &AssociatedObjectHandle, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    func onRefresh(type : DMRefreshViewType){
+        print("onRefresh = \(type)")
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+        if(type == DMRefreshViewType.Header){
+            NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "refreshHeaderEnd", userInfo: nil, repeats: false)
+        }else{
+            NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "refreshFooterEnd", userInfo: nil, repeats: false)
         }
     }
     
-    func showHudLoading(){
-        MyProgressView.showHud(ProgressType.Loading,text: "数据加载中...",isTouchToDismiss: true)
+    func refreshHeaderEnd(){
+        print("refreshHeaderEnd")
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        self.tableView.endRefresh(DMRefreshViewType.Header)
     }
     
-    func showHudOK(){
-        MyProgressView.showHud(ProgressType.OK,text: "", isTouchToDismiss:  true)
-    }
-
-    func showHudError(){
-        MyProgressView.showHud(ProgressType.Custom, text: "", isTouchToDismiss: true)
-    }
-
-    
-    func hideHud(){
-        
+    func refreshFooterEnd(){
+        print("refreshFooterEnd")
+        array.append(String(array.count))
+        tableView.reloadData()
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+        self.tableView.endRefresh(DMRefreshViewType.Footer)
     }
     
-    //    func associatedObject<ValueType: AnyObject>(
-    //        base: AnyObject,
-    //        key: UnsafePointer<UInt8>,
-    //        initialiser: () -> ValueType)
-    //        -> ValueType {
-    //            if let associated = objc_getAssociatedObject(base, key)
-    //                as? ValueType { return associated }
-    //            let associated = initialiser()
-    //            objc_setAssociatedObject(base, key, associated,
-    //                .OBJC_ASSOCIATION_RETAIN)
-    //            return associated
-    //    }
-    //    func associateObject<ValueType: AnyObject>(
-    //        base: AnyObject,
-    //        key: UnsafePointer<UInt8>,
-    //        value: ValueType) {
-    //            objc_setAssociatedObject(base, key, value,
-    //                .OBJC_ASSOCIATION_RETAIN)
-    //    }
-
+    //prama UITableViewDataSource
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+        let cell = tableView.dequeueReusableCellWithIdentifier(kCell)!
+        cell.textLabel?.text = array[indexPath.row]
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        return array.count
+    }
 }

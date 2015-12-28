@@ -15,27 +15,27 @@ extension UIScrollView {
         static var Footer = "Footer"
     }
     
-    var delegateRefresh: RefreshDelegate? {
+    var delegateRefresh: DMRefreshDelegate? {
         get {
-            return objc_getAssociatedObject(self, &RefreshKey.Delegate) as? RefreshDelegate
+            return objc_getAssociatedObject(self, &RefreshKey.Delegate) as? DMRefreshDelegate
         }
         set (delegate) {
             objc_setAssociatedObject(self, &RefreshKey.Delegate, delegate, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
-    var refreshHeader : RefreshHeaderView? {
+    var refreshHeader : DMRefreshHeaderViewBase? {
         get{
-            return objc_getAssociatedObject(self, &RefreshKey.Header) as? RefreshHeaderView
+            return objc_getAssociatedObject(self, &RefreshKey.Header) as? DMRefreshHeaderViewBase
         }
         set(view){
             objc_setAssociatedObject(self, &RefreshKey.Header, view, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
-    var refreshFooter : RefreshFooterView? {
+    var refreshFooter : DMRefreshFooterViewBase? {
         get{
-            return objc_getAssociatedObject(self, &RefreshKey.Footer) as? RefreshFooterView
+            return objc_getAssociatedObject(self, &RefreshKey.Footer) as? DMRefreshFooterViewBase
         }
         set(view){
             objc_setAssociatedObject(self, &RefreshKey.Footer, view, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
@@ -43,31 +43,35 @@ extension UIScrollView {
     }
     
     //注意：添加header或者footer必须在设置UIScrollView的contentInset属性之后
-    public func addRefreshHeader(frame frame: CGRect){
-        let header = RefreshBaseView.createHeaderView(frame: frame)
+    func addRefreshHeader(frame frame: CGRect){
+        let header = DMRefreshBaseView.createHeaderView(frame: frame)
         self.refreshHeader = header
         self.addSubview(header)
     }
     
-    public func removeRefreshHeader(){
+    func removeRefreshHeader(){
         self.refreshHeader?.removeFromSuperview()
     }
     
-    public func beginRefresh(){
+    func beginRefresh(){
         self.refreshHeader?.beginRefresh()
     }
     
-    public func endRefresh(){
-        self.refreshHeader?.endRefresh()
+    func endRefresh(type : DMRefreshViewType){
+        if(type == DMRefreshViewType.Header){
+            self.refreshHeader?.endRefresh()
+        }else{
+            self.refreshFooter?.endRefresh()
+        }
     }
     
-    public func addRefreshFooter(frame frame : CGRect){
-        let footer = RefreshBaseView.createFooterView(frame: frame)
+    func addRefreshFooter(frame frame :  CGRect){
+        let footer = DMRefreshBaseView.createFooterView(frame: frame)
         self.refreshFooter = footer
         self.addSubview(footer)
     }
     
-    public func removeRefreshFooter(){
+    func removeRefreshFooter(){
         self.refreshFooter?.removeFromSuperview()
     }
 }
