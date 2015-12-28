@@ -195,7 +195,7 @@ class DMProgressView : UIView{
     
     private func createAnim() -> CABasicAnimation{
         if(animStrokeEnd == nil){
-            animStrokeEnd = DMAnimationUtils.animStrokeEnd(0.4)
+            animStrokeEnd = DMAnimationUtils.createAnimStrokeEnd(0.4)
         }
         return animStrokeEnd
     }
