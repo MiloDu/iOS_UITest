@@ -9,15 +9,18 @@
 import UIKit
 
 class DMChartAxesView: DMChartView {
+    //用于缓存UILabel
+    private var arrayXLabel = Array<UILabelWithPadding>()
+    private var arrayYLabel = Array<UILabelWithPadding>()
     
     internal var widthChart : CGFloat = 0
     internal var heightChart : CGFloat = 0
     internal var intervalX : CGFloat = 0
     internal var intervalY : CGFloat = 0
+    internal var bottomY : CGFloat = 0          //图表底部坐标，位于X轴label之上
     internal var countY : Int = 0               //根据valueMax和valueInterval计算
-    //用于缓存UILabel
-    private var arrayXLabel = Array<UILabelWithPadding>()
-    private var arrayYLabel = Array<UILabelWithPadding>()
+    
+    var arrayPoint = Array<CGPoint>()
     
     var colorXAxes = UIColor.grayColor()
     var colorYAxes = UIColor.grayColor()
@@ -66,6 +69,7 @@ class DMChartAxesView: DMChartView {
         //图表的有效宽度和高度
         self.widthChart = self.width - self.marginLeft - self.marginRight
         self.heightChart = self.height - self.marginBottom - self.marginTop
+        self.bottomY = self.height - self.marginBottom
         //Y轴数量
         let countF = valueMax / valueInterval
         self.countY = Int(ceil(countF))
@@ -74,13 +78,20 @@ class DMChartAxesView: DMChartView {
             self.intervalX = widthChart / CGFloat(arrayData.count)
         }
         self.intervalY = self.heightChart / countF
+        //数据点
+        arrayPoint.removeAll()
+        for i in 0 ..< arrayData.count{
+            let x = self.marginLeft + (CGFloat(i) + 0.5) * self.intervalX
+            let y = self.bottomY - (self.arrayData[i].value / self.valueMax) * self.heightChart
+            arrayPoint.append(CGPointMake(x, y))
+        }
     }
     
     private func drawAxes(){
         let arrowLength : CGFloat = 4
         let pathAxes = UIBezierPath()
         let startX = marginLeft
-        let startY = self.height - marginBottom
+        let startY = self.bottomY + 0.5 // +0.5是为了防止被Bar覆盖
         let endX = self.width - 1
         let endY : CGFloat = 1
         let origin = CGPointMake(startX, startY)
@@ -112,7 +123,7 @@ class DMChartAxesView: DMChartView {
         
         //Y flag
         for i in 1 ..< self.countY + 1{
-            let y = self.height - self.marginBottom - CGFloat(i) * self.intervalY
+            let y = startY - CGFloat(i) * self.intervalY
             pathAxes.moveToPoint(CGPointMake(startX, y))
             pathAxes.addLineToPoint(CGPointMake(startX + 2, y))
         }
@@ -127,13 +138,12 @@ class DMChartAxesView: DMChartView {
             return
         }
         
-        var labelWidth = self.width - self.marginLeft - self.marginRight
-        labelWidth /= CGFloat(arrayXString.count)
+        let labelWidth = self.widthChart / CGFloat(arrayXString.count)
         let maxCount = max(arrayXLabel.count, arrayXString.count)
         for i in 0 ..< maxCount {
             if(i < arrayXString.count){
                 var label : UILabelWithPadding!
-                let frame = CGRectMake(CGFloat(i) * labelWidth + self.marginLeft + self.marginBetweenXLabel, self.height - marginBottom, labelWidth - self.marginBetweenXLabel * 2 , self.marginBottom)
+                let frame = CGRectMake(CGFloat(i) * labelWidth + self.marginLeft, self.bottomY, labelWidth, self.marginBottom)
                 if(arrayXLabel.count <= i){
                     label = UILabelWithPadding(frame: frame)
                     self.addSubview(label)
@@ -148,6 +158,7 @@ class DMChartAxesView: DMChartView {
                 }
                 label.tag = 1000 + i
                 label.text = String(i)
+//                label.backgroundColor = UIColor.blackColor()
                 self.labelForXAxes?(label: label, index: i)
             }else{
                 arrayXLabel[i].hidden = true
@@ -168,7 +179,7 @@ class DMChartAxesView: DMChartView {
         for i in 0 ..< maxCount {
             if(i < self.countY + 1){
                 var label : UILabelWithPadding!
-                var frame = CGRectMake(0, self.height - self.marginBottom - 10 - CGFloat(i) * self.intervalY, self.marginLeft, 20)
+                var frame = CGRectMake(0, self.bottomY - 10 - CGFloat(i) * self.intervalY, self.marginLeft, 20)
                 //不能整除时，该值为true
                 let singleMax = (i == self.countY && !isJustDivider)
                 if (singleMax){
@@ -209,7 +220,7 @@ class DMChartAxesView: DMChartView {
         label.textColor = UIColor.grayColor()
         label.font = UIFont.systemFontOfSize(12)
         label.textAlignment = NSTextAlignment.Right
-        label.padding = UIEdgeInsetsMake(0, 4, 0, 4)
+        label.padding = UIEdgeInsetsMake(0, self.marginBetweenXLabel, 0, self.marginBetweenXLabel)
         return label
     }
 }

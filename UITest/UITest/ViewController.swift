@@ -83,7 +83,7 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
     
     func testChartView(){
         let chartAxesView =  DMChartView.createBarView(frame: CGRectMake(0,50,self.view.width,300))
-        chartAxesView.backgroundColor = UIColor.cyanColor()
+        chartAxesView.backgroundColor = UIColor.lightGrayColor()
         chartAxesView.tag = 200
         self.view.addSubview(chartAxesView)
         let tapRecognizer = UITapGestureRecognizer(target: self, action: "onTap:")
@@ -105,7 +105,7 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
             chartView.arrayXString.append(String(i))
             
             let item = DMDataItem()
-            item.value = CGFloat(i)
+            item.value = CGFloat(i + 1)
             chartView.arrayData.append(item)
         }
         chartView.valueMax = maxValue
