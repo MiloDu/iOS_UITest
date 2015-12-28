@@ -22,8 +22,8 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         self.edgesForExtendedLayout = UIRectEdge.None
         
 //        testCircleView()
-//        testRefresh()
-        test3D()
+        testRefresh()
+//        test3D()
     }
     
     func testCircleView(){
@@ -105,6 +105,7 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
     @IBAction func onRefreshClicked(sender: UIBarButtonItem) {
         tableView.beginRefresh()
     }
+
     //#prama RefreshDelegate
     func onRefresh(type : DMRefreshViewType){
         print("onRefresh = \(type)")

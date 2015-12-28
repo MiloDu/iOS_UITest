@@ -41,8 +41,8 @@ extension UIScrollView {
             objc_setAssociatedObject(self, &RefreshKey.Footer, view, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-
     
+    //注意：添加header或者footer必须在设置UIScrollView的contentInset属性之后
     func addRefreshHeader(frame frame: CGRect){
         let header = DMRefreshBaseView.createHeaderView(frame: frame)
         self.refreshHeader = header
