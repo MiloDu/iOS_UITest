@@ -47,7 +47,7 @@ class DMRefreshHeaderViewBounce : DMRefreshHeaderViewBase {
     
     override func onNormalFromRelease() {
         label.text = strPullToRefresh
-        UIView.animateWithDuration(DMAnimationDuraiton) { () -> Void in
+        UIView.animateWithDuration(animationDuraiton) { () -> Void in
             self.arrow.transform = CGAffineTransformIdentity
         }
     }
@@ -55,12 +55,11 @@ class DMRefreshHeaderViewBounce : DMRefreshHeaderViewBase {
         label.text = strRefreshing
         activityIndicator.startAnimating()
         arrow.hidden = true
-
     }
     
     override func onReleaseFromNormal() {
         label.text = strReleaseToRefresh
-        UIView.animateWithDuration(DMAnimationDuraiton) { () -> Void in
+        UIView.animateWithDuration(animationDuraiton) { () -> Void in
             self.arrow.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
         }
     }

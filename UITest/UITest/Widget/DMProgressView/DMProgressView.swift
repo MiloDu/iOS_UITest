@@ -179,7 +179,7 @@ class DMProgressView : UIView{
     }
     
     private func configCustom(){
-        let path = DMPathUtils.pathDollar(centerFrame)
+        let path = DMPathUtils.createPathDollar(centerFrame)
         shapeLayer = CAShapeLayer()
         configShapeLayer()
         shapeLayer.path = path.CGPath

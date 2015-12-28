@@ -44,7 +44,7 @@ class DMRefreshHeaderViewDefault : DMRefreshHeaderViewBase {
     override func onNormalFromRelease() {
         super.onNormalFromRelease()
         label.text = strPullToRefresh
-        UIView.animateWithDuration(DMAnimationDuraiton) { () -> Void in
+        UIView.animateWithDuration(animationDuraiton) { () -> Void in
             self.arrow.transform = CGAffineTransformIdentity
         }
     }
@@ -60,7 +60,7 @@ class DMRefreshHeaderViewDefault : DMRefreshHeaderViewBase {
     override func onReleaseFromNormal() {
         super.onReleaseFromNormal()
         label.text = strReleaseToRefresh
-        UIView.animateWithDuration(DMAnimationDuraiton) { () -> Void in
+        UIView.animateWithDuration(animationDuraiton) { () -> Void in
             self.arrow.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
         }
     }

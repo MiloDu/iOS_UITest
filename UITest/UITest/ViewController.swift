@@ -82,7 +82,8 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
     }
     
     func testChartView(){
-        let chartAxesView =  DMChartView.createBarView(frame: CGRectMake(0,50,self.view.width,300))
+//        let chartAxesView =  DMChartView.createBarView(frame: CGRectMake(0,50,self.view.width,300))
+        let chartAxesView =  DMChartView.createLineView(frame: CGRectMake(0,50,self.view.width,300))
         chartAxesView.backgroundColor = UIColor.lightGrayColor()
         chartAxesView.tag = 200
         self.view.addSubview(chartAxesView)
@@ -98,7 +99,7 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         configChartData(chartAxesView, count: 5, maxValue: 10)
     }
     
-    private func configChartData(chartView: DMChartBarView, count : Int, maxValue : CGFloat){
+    private func configChartData(chartView: DMChartAxesView, count : Int, maxValue : CGFloat){
         chartView.arrayXString.removeAll()
         chartView.arrayData.removeAll()
         for i in 0 ..< count{
@@ -119,13 +120,16 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
                 let view = self.view.viewWithTag(100)!
                 let rotationT = CATransform3DRotate(view.layer.transform, DMConsts.PI, 1, 0, 0)
                 //        imageView.layer.transform = rotationT
-                let rotationPers = DMLayerUtils.CATransform3DPerspective(rotationT)
+                let rotationPers = DMAnimationUtils.CATransform3DPerspective(rotationT)
                 //        imageView.layer.zPosition = 100
                 view.layer.transform = rotationPers
             }
         }else if(recognizer.view?.tag == 200){
-            let view = self.view.viewWithTag(200) as! DMChartBarView
+            let view = self.view.viewWithTag(200) as! DMChartAxesView
             configChartData(view, count: count++, maxValue: 40)
+            if(view.arrayXString.count >= 10){
+                count = 2
+            }
             view.setNeedsDisplay()
         }
     }

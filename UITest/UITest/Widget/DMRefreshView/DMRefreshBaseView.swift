@@ -31,7 +31,6 @@ protocol DMRefreshDelegate : NSObjectProtocol{
 
 let kDMContentOffset = "contentOffset"
 let kDMContentSize = "contentSize"
-let DMAnimationDuraiton = 0.2
 
 class DMRefreshBaseView: UIView {
     static func createHeaderView(frame frame : CGRect) -> DMRefreshHeaderViewBase{
@@ -43,6 +42,7 @@ class DMRefreshBaseView: UIView {
     }
 
     @IBInspectable var viewTypeRawValue : Int = 1            //用于nib文件中与ViewType对应，1 = Header, 2 = Footer
+    let animationDuraiton = 0.2
     var viewType : DMRefreshViewType = DMRefreshViewType.Header
     var scrollView : UIScrollView!
     var scrollViewOriginalInset : UIEdgeInsets!
@@ -155,7 +155,7 @@ class DMRefreshHeaderViewBase: DMRefreshBaseView {
                 if(oldValue == DMRefreshState.Refreshing){
                     //Refresh End
                     onNormalFromRefreshing()
-                    UIView.animateWithDuration(DMAnimationDuraiton, animations: { () -> Void in
+                    UIView.animateWithDuration(animationDuraiton, animations: { () -> Void in
                         var contentInset = self.scrollView.contentInset
                         contentInset.top = self.scrollViewOriginalInset.top
                         self.scrollView.contentInset = contentInset
@@ -171,7 +171,7 @@ class DMRefreshHeaderViewBase: DMRefreshBaseView {
                 break
             case DMRefreshState.Refreshing:
                 onRefreshing()
-                UIView.animateWithDuration(DMAnimationDuraiton, animations: { () -> Void in
+                UIView.animateWithDuration(animationDuraiton, animations: { () -> Void in
                     var contentInset = self.scrollView.contentInset
                     contentInset.top = self.scrollViewOriginalInset.top + self.originalHeight
                     self.scrollView.contentInset = contentInset
@@ -259,7 +259,7 @@ class DMRefreshFooterViewBase: DMRefreshBaseView {
                 if(oldValue == DMRefreshState.Refreshing){
                     //DMRefresh End
                     onNormalFromRefreshing()
-                    UIView.animateWithDuration(DMAnimationDuraiton, animations: { () -> Void in
+                    UIView.animateWithDuration(animationDuraiton, animations: { () -> Void in
                         var contentInset = self.scrollView.contentInset
                         contentInset.bottom = self.scrollViewOriginalInset.bottom
                         self.scrollView.contentInset = contentInset
@@ -275,7 +275,7 @@ class DMRefreshFooterViewBase: DMRefreshBaseView {
                 break
             case DMRefreshState.Refreshing:
                 onRefreshing()
-                UIView.animateWithDuration(DMAnimationDuraiton, animations: { () -> Void in
+                UIView.animateWithDuration(animationDuraiton, animations: { () -> Void in
                     var bottom:CGFloat = self.frame.size.height + self.scrollViewOriginalInset.bottom
                     let maxOffsetY = self.computeMaxOffsetY()
                     if maxOffsetY < 0 {
