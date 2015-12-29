@@ -32,6 +32,7 @@
 		6368225B1C3110EB00D8A8E9 /* DMChartBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6368225A1C3110EB00D8A8E9 /* DMChartBarView.swift */; };
 		6368225F1C313D6A00D8A8E9 /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6368225D1C313D6A00D8A8E9 /* ExtensionUIView.swift */; };
 		636822601C313D6A00D8A8E9 /* ExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6368225E1C313D6A00D8A8E9 /* ExtensionViewController.swift */; };
+		63C595151C322219007AF6EA /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C595141C322219007AF6EA /* ExtensionString.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,8 @@
 		6368225A1C3110EB00D8A8E9 /* DMChartBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DMChartBarView.swift; path = DMChartView/DMChartBarView.swift; sourceTree = "<group>"; };
 		6368225D1C313D6A00D8A8E9 /* ExtensionUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtensionUIView.swift; path = Extension/ExtensionUIView.swift; sourceTree = "<group>"; };
 		6368225E1C313D6A00D8A8E9 /* ExtensionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtensionViewController.swift; path = Extension/ExtensionViewController.swift; sourceTree = "<group>"; };
+		63C595141C322219007AF6EA /* ExtensionString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtensionString.swift; path = Extension/ExtensionString.swift; sourceTree = "<group>"; };
+		63C595161C3224D7007AF6EA /* UITest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITest-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +159,7 @@
 				26F779411C1E4B8D000D3A2F /* Assets.xcassets */,
 				26F779431C1E4B8D000D3A2F /* LaunchScreen.storyboard */,
 				26F779461C1E4B8D000D3A2F /* Info.plist */,
+				63C595161C3224D7007AF6EA /* UITest-Bridging-Header.h */,
 			);
 			path = UITest;
 			sourceTree = "<group>";
@@ -176,6 +180,7 @@
 			children = (
 				6368225D1C313D6A00D8A8E9 /* ExtensionUIView.swift */,
 				6368225E1C313D6A00D8A8E9 /* ExtensionViewController.swift */,
+				63C595141C322219007AF6EA /* ExtensionString.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -259,6 +264,7 @@
 				2669F11E1C2FE2570002DF14 /* DMAnimationUtils.swift in Sources */,
 				26DB0F111C2E85DE007C1E28 /* DMUtils.swift in Sources */,
 				26DB0F0E1C2E85BC007C1E28 /* ScrollView+DMRefresh.swift in Sources */,
+				63C595151C322219007AF6EA /* ExtensionString.swift in Sources */,
 				26DB0F0A1C2E85BC007C1E28 /* DMProgressView.swift in Sources */,
 				26F7793D1C1E4B8D000D3A2F /* ViewController.swift in Sources */,
 				26DB0F0B1C2E85BC007C1E28 /* DMRefreshBaseView.swift in Sources */,
@@ -383,10 +389,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = UITest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = milo.ios.app.UITest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "UITest/UITest-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -394,10 +403,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = UITest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = milo.ios.app.UITest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "UITest/UITest-Bridging-Header.h";
 			};
 			name = Release;
 		};

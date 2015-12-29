@@ -100,6 +100,7 @@ class DMRefreshBaseView: UIView {
     
     internal func onContentOffsetChanged(){} //子类实现，用于监听UIScrollView contentOffset变化以改变状态
     //状态切换，在子类中实现各种效果
+    internal func onStateChangeWithContentOffset(offset : CGPoint){}       //contentOffset发生变化且Header或Footer显示出来
     internal func onNormalFromRefreshing(){}
     internal func onNormalFromRelease(){}
     internal func onReleaseFromNormal(){}
@@ -223,6 +224,7 @@ class DMRefreshHeaderViewBase: DMRefreshBaseView {
         if(offsetY >= threshold){
             return
         }
+//        print("offset header = \(offsetY)")
         if(self.scrollView.dragging){
             if(self.state == DMRefreshState.Normal && offsetY < threshold - originalHeight){
                 // Normal -> ReleaseToRefresh
@@ -236,6 +238,7 @@ class DMRefreshHeaderViewBase: DMRefreshBaseView {
                 self.state = DMRefreshState.Refreshing
             }
         }
+        self.onStateChangeWithContentOffset(self.scrollView.contentOffset)
     }
 }
 
@@ -351,6 +354,7 @@ class DMRefreshFooterViewBase: DMRefreshBaseView {
         if(offsetY <= threshold){
             return
         }
+        print("offset footer = \(offsetY)")
         if(self.scrollView.dragging){
             if(self.state == DMRefreshState.Normal && offsetY > threshold + originalHeight){
                 // Normal -> ReleaseToDMRefresh
@@ -364,6 +368,7 @@ class DMRefreshFooterViewBase: DMRefreshBaseView {
                 self.state = DMRefreshState.Refreshing
             }
         }
+        self.onStateChangeWithContentOffset(self.scrollView.contentOffset)
     }
     
     private func computeMaxOffsetY() ->CGFloat{

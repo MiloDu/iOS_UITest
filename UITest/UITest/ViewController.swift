@@ -24,9 +24,10 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         self.edgesForExtendedLayout = UIRectEdge.None
         
 //        testCircleView()
-//        testRefresh()
+        testRefresh()
 //        test3D()
-        testChartView()
+//        testChartView()
+//        testEncryt()
     }
     
     func testCircleView(){
@@ -74,12 +75,19 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         tableView.tableFooterView = UIView() //隐藏无效的分割线
         tableView.dataSource = self
         self.view.addSubview(tableView)
+
+//        let headerView = UIView(frame: CGRectMake(0,0,320,100))
+//        headerView.backgroundColor = UIColor.yellowColor()
+//        tableView.tableHeaderView = headerView
+//        let footerView = UIView(frame: CGRectMake(0,0,320,100))
+//        footerView.backgroundColor = UIColor.greenColor()
+//        tableView.tableFooterView = footerView
+
+//        tableView.contentInset = UIEdgeInsetsMake(30, 0, 0, 0)
         
         tableView.addRefreshHeader(frame: CGRectMake(0 , 0, 320, 64))
         tableView.addRefreshFooter(frame : CGRectMake(0,0,320,64))
-        tableView.delegateRefresh = self
-        print("table = \(tableView.frame)")
-    }
+        tableView.delegateRefresh = self    }
     
     func testChartView(){
 //        let chartAxesView =  DMChartView.createBarView(frame: CGRectMake(0,50,self.view.width,300))
@@ -111,6 +119,17 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         }
         chartView.valueMax = maxValue
         chartView.valueInterval = maxValue / CGFloat(count)
+    }
+    
+    func testEncryt(){
+        let str = "hahahaha"
+        let str1 = str.toMD5()
+        print("str1 = \(str1)")
+        let str2 = str.toBase64Encode()
+        print("str2 = \(str2)")
+        let str3 = "aGFoYWhhaGE=".toBase64Decode()
+        print("str3 = \(str3)")
+        print("str4 = \(str.toBase64Decode())")
     }
     
     func onTap(recognizer : UITapGestureRecognizer){
