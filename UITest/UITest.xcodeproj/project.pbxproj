@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2621632A1C32C7CC005C14A2 /* UIDollarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262163291C32C7CC005C14A2 /* UIDollarView.swift */; };
+		2621632C1C32C7E0005C14A2 /* UIArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2621632B1C32C7E0005C14A2 /* UIArrowView.swift */; };
 		2632B22E1C315C5C002A4A23 /* DMCacheUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632B22D1C315C5C002A4A23 /* DMCacheUtils.swift */; };
-		26650A8F1C2F7C0200F132BA /* DMRefreshHeaderViewBounce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26650A8E1C2F7C0200F132BA /* DMRefreshHeaderViewBounce.swift */; };
+		26650A8F1C2F7C0200F132BA /* DMRefreshHeaderViewDollar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26650A8E1C2F7C0200F132BA /* DMRefreshHeaderViewDollar.swift */; };
 		26650A951C2F972900F132BA /* DMPathUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26650A941C2F972900F132BA /* DMPathUtils.swift */; };
 		2669F11E1C2FE2570002DF14 /* DMAnimationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2669F11D1C2FE2570002DF14 /* DMAnimationUtils.swift */; };
 		268C2E411C3175E900231D09 /* DMChartLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268C2E401C3175E900231D09 /* DMChartLineView.swift */; };
@@ -36,8 +38,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		262163291C32C7CC005C14A2 /* UIDollarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDollarView.swift; sourceTree = "<group>"; };
+		2621632B1C32C7E0005C14A2 /* UIArrowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIArrowView.swift; sourceTree = "<group>"; };
 		2632B22D1C315C5C002A4A23 /* DMCacheUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMCacheUtils.swift; sourceTree = "<group>"; };
-		26650A8E1C2F7C0200F132BA /* DMRefreshHeaderViewBounce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMRefreshHeaderViewBounce.swift; sourceTree = "<group>"; };
+		26650A8E1C2F7C0200F132BA /* DMRefreshHeaderViewDollar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMRefreshHeaderViewDollar.swift; sourceTree = "<group>"; };
 		26650A941C2F972900F132BA /* DMPathUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMPathUtils.swift; sourceTree = "<group>"; };
 		2669F11D1C2FE2570002DF14 /* DMAnimationUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMAnimationUtils.swift; sourceTree = "<group>"; };
 		268C2E401C3175E900231D09 /* DMChartLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DMChartLineView.swift; path = DMChartView/DMChartLineView.swift; sourceTree = "<group>"; };
@@ -94,6 +98,8 @@
 				26650A941C2F972900F132BA /* DMPathUtils.swift */,
 				2669F11D1C2FE2570002DF14 /* DMAnimationUtils.swift */,
 				636822581C30D81E00D8A8E9 /* UILabelWithPadding.swift */,
+				262163291C32C7CC005C14A2 /* UIDollarView.swift */,
+				2621632B1C32C7E0005C14A2 /* UIArrowView.swift */,
 				636822511C30BDBE00D8A8E9 /* DMChartView */,
 				26DB0EFE1C2E85BC007C1E28 /* DMCircleView */,
 				26DB0F001C2E85BC007C1E28 /* DMProgressView */,
@@ -123,7 +129,7 @@
 			children = (
 				26DB0F031C2E85BC007C1E28 /* DMRefreshBaseView.swift */,
 				26DB0F051C2E85BC007C1E28 /* DMRefreshHeaderViewDefault.swift */,
-				26650A8E1C2F7C0200F132BA /* DMRefreshHeaderViewBounce.swift */,
+				26650A8E1C2F7C0200F132BA /* DMRefreshHeaderViewDollar.swift */,
 				26DB0F041C2E85BC007C1E28 /* DMRefreshFooterViewDefault.swift */,
 				26DB0F061C2E85BC007C1E28 /* ScrollView+DMRefresh.swift */,
 			);
@@ -258,7 +264,7 @@
 			files = (
 				268C2E411C3175E900231D09 /* DMChartLineView.swift in Sources */,
 				26DB0F0D1C2E85BC007C1E28 /* DMRefreshHeaderViewDefault.swift in Sources */,
-				26650A8F1C2F7C0200F132BA /* DMRefreshHeaderViewBounce.swift in Sources */,
+				26650A8F1C2F7C0200F132BA /* DMRefreshHeaderViewDollar.swift in Sources */,
 				26DB0F0C1C2E85BC007C1E28 /* DMRefreshFooterViewDefault.swift in Sources */,
 				636822571C30C56200D8A8E9 /* DMChartView.swift in Sources */,
 				2669F11E1C2FE2570002DF14 /* DMAnimationUtils.swift in Sources */,
@@ -276,6 +282,8 @@
 				26B8160B1C2EBB730062692A /* CellTest.swift in Sources */,
 				26F7793B1C1E4B8D000D3A2F /* AppDelegate.swift in Sources */,
 				6368225B1C3110EB00D8A8E9 /* DMChartBarView.swift in Sources */,
+				2621632C1C32C7E0005C14A2 /* UIArrowView.swift in Sources */,
+				2621632A1C32C7CC005C14A2 /* UIDollarView.swift in Sources */,
 				26DB0F091C2E85BC007C1E28 /* DMCircleView.swift in Sources */,
 				636822561C30C56200D8A8E9 /* DMChartAxesView.swift in Sources */,
 				636822601C313D6A00D8A8E9 /* ExtensionViewController.swift in Sources */,

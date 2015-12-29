@@ -43,8 +43,8 @@ extension UIScrollView {
     }
     
     //注意：添加header或者footer必须在设置UIScrollView的contentInset属性之后
-    func addRefreshHeader(frame frame: CGRect){
-        let header = DMRefreshBaseView.createHeaderView(frame: frame)
+    func addRefreshHeader(frame frame: CGRect, type : DMRefreshHeaderViewType = DMRefreshHeaderViewType.Default){
+        let header = DMRefreshBaseView.createHeaderView(frame: frame, type: type)
         self.refreshHeader = header
         self.addSubview(header)
     }

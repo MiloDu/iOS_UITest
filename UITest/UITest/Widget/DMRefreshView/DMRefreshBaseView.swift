@@ -25,6 +25,16 @@ enum DMRefreshViewType{
     }
 }
 
+enum DMRefreshHeaderViewType{
+    case Default
+    case Dollar
+}
+
+enum DMRefreshFooterViewType{
+    case Default
+    case Dollar
+}
+
 protocol DMRefreshDelegate : NSObjectProtocol{
     func onRefresh(viewType : DMRefreshViewType)
 }
@@ -33,8 +43,13 @@ let kDMContentOffset = "contentOffset"
 let kDMContentSize = "contentSize"
 
 class DMRefreshBaseView: UIView {
-    static func createHeaderView(frame frame : CGRect) -> DMRefreshHeaderViewBase{
-        return DMRefreshHeaderViewDefault(frame: frame)
+    static func createHeaderView(frame frame : CGRect,type : DMRefreshHeaderViewType = DMRefreshHeaderViewType.Default) -> DMRefreshHeaderViewBase{
+        switch type{
+        case .Dollar:
+            return DMRefreshHeaderViewDollar(frame: frame)
+        default:
+            return DMRefreshHeaderViewDefault(frame: frame)
+        }
     }
     
     static func createFooterView(frame frame : CGRect) -> DMRefreshFooterViewBase{
@@ -100,7 +115,7 @@ class DMRefreshBaseView: UIView {
     
     internal func onContentOffsetChanged(){} //子类实现，用于监听UIScrollView contentOffset变化以改变状态
     //状态切换，在子类中实现各种效果
-    internal func onStateChangeWithContentOffset(offset : CGPoint){}       //contentOffset发生变化且Header或Footer显示出来
+    internal func onStateChangeWithOffset(offset : CGPoint){}       //contentOffset发生变化且Header或Footer显示出来
     internal func onNormalFromRefreshing(){}
     internal func onNormalFromRelease(){}
     internal func onReleaseFromNormal(){}
@@ -238,7 +253,7 @@ class DMRefreshHeaderViewBase: DMRefreshBaseView {
                 self.state = DMRefreshState.Refreshing
             }
         }
-        self.onStateChangeWithContentOffset(self.scrollView.contentOffset)
+        self.onStateChangeWithOffset(CGPointMake(self.scrollView.contentOffset.x, threshold - offsetY))
     }
 }
 
@@ -368,7 +383,7 @@ class DMRefreshFooterViewBase: DMRefreshBaseView {
                 self.state = DMRefreshState.Refreshing
             }
         }
-        self.onStateChangeWithContentOffset(self.scrollView.contentOffset)
+        self.onStateChangeWithOffset(CGPointMake(self.scrollView.contentOffset.x, threshold - offsetY) )
     }
     
     private func computeMaxOffsetY() ->CGFloat{

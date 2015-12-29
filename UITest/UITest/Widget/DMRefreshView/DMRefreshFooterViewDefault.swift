@@ -10,7 +10,7 @@ import UIKit
 
 class DMRefreshFooterViewDefault: DMRefreshFooterViewBase {
     var label : UILabel!
-    var arrow : ArrowView!
+    var arrow : UIArrowView!
     var activityIndicator : UIActivityIndicatorView!
     
     internal override func config(){
@@ -18,7 +18,7 @@ class DMRefreshFooterViewDefault: DMRefreshFooterViewBase {
         let width : CGFloat = 24
         let x = self.frame.size.width * 0.47
         let y = self.frame.size.height * 0.5
-        arrow = ArrowView(frame: CGRectMake(x - 3 - width, y - width * 0.5, width, width))
+        arrow = UIArrowView(frame: CGRectMake(x - 3 - width, y - width * 0.5, width, width))
         arrow.transform = CGAffineTransformMakeRotation(CGFloat(M_PI))
         self.addSubview(arrow)
         
