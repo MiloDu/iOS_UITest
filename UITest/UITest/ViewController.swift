@@ -24,10 +24,15 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         self.edgesForExtendedLayout = UIRectEdge.None
         
 //        testCircleView()
-        testRefresh()
+//        testRefresh()
 //        test3D()
 //        testChartView()
 //        testEncryt()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.presentViewController(ViewController2(), animated: true, completion: nil)
     }
     
     func testCircleView(){
@@ -170,7 +175,7 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         tableView.beginRefresh()
     }
 
-    //#prama RefreshDelegate
+    //MARK: RefreshDelegate
     func onRefresh(type : DMRefreshViewType){
         print("onRefresh = \(type)")
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
@@ -195,7 +200,7 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         self.tableView.endRefresh(DMRefreshViewType.Footer)
     }
     
-    //prama UITableViewDataSource
+    //MARK: UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCellWithIdentifier(kCell)!
         cell.textLabel?.text = array[indexPath.row]

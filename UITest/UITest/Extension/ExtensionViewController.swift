@@ -8,8 +8,12 @@
 
 import UIKit
 
-extension ViewController {
-    
+extension UIViewController {
+    private struct _ParamKey {
+        static var TapGesture = "TapGesture"
+        static var DictView = "DictView"
+    }
+
     var heightStatusBar : CGFloat{
         return UIApplication.sharedApplication().statusBarFrame.size.height
     }
@@ -65,5 +69,62 @@ extension ViewController {
     
     func hideHud(){
         DMNoticeView.hideHud()
+    }
+    
+    //MARK:- Keyboard Manager
+    var arrayViews: Array<UIView>? {
+        get {
+            return objc_getAssociatedObject(self, &_ParamKey.DictView) as? Array<UIView>
+        }
+        set (array) {
+            objc_setAssociatedObject(self, &_ParamKey.DictView, array, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    var tapGesture: UITapGestureRecognizer? {
+        get {
+            return objc_getAssociatedObject(self, &_ParamKey.TapGesture) as? UITapGestureRecognizer
+        }
+        set (tap) {
+            objc_setAssociatedObject(self, &_ParamKey.TapGesture, tap, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    func addObsever(){
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "_onKeyboardShow:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "_onKeyboardHide:", name: UIKeyboardWillHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "_onEditEnd", name: UITextFieldTextDidEndEditingNotification, object: nil)
+    }
+    
+    func removeObsever(){
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    func _onKeyboardShow(notification : NSNotification){
+        let keyboardInfo = notification.userInfo![UIKeyboardFrameBeginUserInfoKey]
+        let height = keyboardInfo?.CGRectValue.size.height
+        if(tapGesture == nil){
+            tapGesture = UITapGestureRecognizer(target: self, action: "hideKeyboard")
+        }
+        self.view.addGestureRecognizer(tapGesture!)
+    }
+    
+    func _onKeyboardHide(notification : NSNotification){
+//        print("onKeyboardHide")
+    }
+    
+    func _onEditEnd(){
+     print("_onEditEnd")
+    }
+    
+    func registerView(view: UIView, changedView: UIView){
+        
+    }
+    
+    func hideKeyboard(){
+        self.view.removeGestureRecognizer(tapGesture!)
+        self.view.endEditing(true)
+        self.view.becomeFirstResponder()
     }
 }
