@@ -13,8 +13,8 @@ class DMRefreshHeaderViewDollar : DMRefreshHeaderViewBase {
     var label : UILabel!
     var dollarView : UIDollarView!
     
-    internal override func config(){
-        super.config()
+    internal override func _config(){
+        super._config()
         let width : CGFloat = 24
         let x = self.frame.size.width * 0.47
         let y = self.frame.size.height * 0.5
@@ -30,23 +30,24 @@ class DMRefreshHeaderViewDollar : DMRefreshHeaderViewBase {
         self.addSubview(label)
     }
 
-    override func onNormalFromRefreshing() {
+    override func _onNormalFromRefreshing() {
         label.text = strPullToRefresh
     }
     
-    override func onNormalFromRelease() {
+    override func _onNormalFromRelease() {
         label.text = strPullToRefresh
     }
-    override func onRefreshing() {
+    override func _onRefreshing() {
         label.text = strRefreshing
-        dollarView.addAnimationRotate()
+//        dollarView.addAnimationRotate()
     }
     
-    override func onReleaseFromNormal() {
+    override func _onReleaseFromNormal() {
         label.text = strReleaseToRefresh
     }
     
-    override func onStateChangeWithOffset(offset: CGPoint) {
+    override func _onStateChangeWithOffset(offset: CGPoint) {
+        super._onStateChangeWithOffset(offset)
         print("y = \(offset.y),origin = \(originalHeight)")
         let end = min(1, offset.y / originalHeight)
         dollarView.setStrokeEnd(end)

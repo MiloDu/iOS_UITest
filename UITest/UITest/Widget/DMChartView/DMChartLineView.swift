@@ -32,11 +32,11 @@ class DMChartLineView: DMChartAxesView {
     
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
-        drawLine()
+        _drawLine()
         print("sublayer = \(self.layer.sublayers?.count)")
     }
     
-    private func drawLine(){
+    private func _drawLine(){
         let path = UIBezierPath()
         let path2 = UIBezierPath()
         for i in 0 ..< self.arrayPoint.count{

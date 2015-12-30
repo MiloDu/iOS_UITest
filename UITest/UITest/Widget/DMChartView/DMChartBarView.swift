@@ -23,23 +23,23 @@ class DMChartBarView: DMChartAxesView {
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
         if(showBackground){
-            drawBarBackground()
+            _drawBarBackground()
         }
-        drawBar()
+        _drawBar()
     }
     
-    private func drawBarBackground(){
-        let path = createPath(true)
+    private func _drawBarBackground(){
+        let path = _createPath(true)
         colorBarBackground.set()
         path.stroke()
     }
 
-    private func drawBar(){
+    private func _drawBar(){
         if(_layerBar == nil){
             _layerBar = CAShapeLayer()
             self.layer.addSublayer(_layerBar)
         }
-        let path = createPath(false)
+        let path = _createPath(false)
         _layerBar.strokeColor = colorBar.CGColor
         _layerBar.path = path.CGPath
         if(!showAnimation){
@@ -53,7 +53,7 @@ class DMChartBarView: DMChartAxesView {
         }
     }
     
-    private func drawText(width : CGFloat){
+    private func _drawText(width : CGFloat){
         weak var weakself = self
         DMCacheUtils.cacheFromArray(_arrayLayerText, count: arrayData.count) {(var layer, index) -> Void in
             if(index < weakself?.arrayData.count){
@@ -77,14 +77,14 @@ class DMChartBarView: DMChartAxesView {
         }
     }
     
-    private func createPath(isBackground : Bool) -> UIBezierPath {
+    private func _createPath(isBackground : Bool) -> UIBezierPath {
         let path = UIBezierPath()
-        let startY = self.bottomY
-        let width = max(1 ,min(self.maxBarWidth, self.intervalX - self.marginBar * 2))
+        let startY = self._bottomY
+        let width = max(1 ,min(self.maxBarWidth, self._intervalX - self.marginBar * 2))
         for i in 0 ..< self.arrayData.count {
             path.moveToPoint(CGPointMake(self.arrayPoint[i].x, startY))
             if(isBackground){
-                path.addLineToPoint(CGPointMake(self.arrayPoint[i].x, startY - self.heightChart))
+                path.addLineToPoint(CGPointMake(self.arrayPoint[i].x, startY - self._heightChart))
             }else{
                 path.addLineToPoint(self.arrayPoint[i])
             }
@@ -92,7 +92,7 @@ class DMChartBarView: DMChartAxesView {
         path.lineWidth = width
         
         if(showText){
-            drawText(width)
+            _drawText(width)
         }
         return path
     }

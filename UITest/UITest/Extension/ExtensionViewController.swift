@@ -48,22 +48,22 @@ extension ViewController {
     }
     
     func showHudLoading(){
-        DMProgressView.showHud(ProgressType.Loading,text: "数据加载中...",isTouchToDismiss: true)
+        DMNoticeView.showHud(DMNoticeType.Loading,text: "数据加载中...",isTouchToDismiss: true)
     }
     
     func showHudOK(){
-        DMProgressView.showHud(ProgressType.OK,text: "", isTouchToDismiss:  true)
+        DMNoticeView.showHud(DMNoticeType.OK,text: "", isTouchToDismiss:  true)
     }
     
     func showHudError(){
-        DMProgressView.showHud(ProgressType.Error, text: "", isTouchToDismiss: true)
+        DMNoticeView.showHud(DMNoticeType.Error, text: "", isTouchToDismiss: true)
     }
     
     func showHudCustom(){
-        DMProgressView.showHud(ProgressType.Custom, text: "", isTouchToDismiss: true)
+        DMNoticeView.showHud(DMNoticeType.Custom, text: "", isTouchToDismiss: true)
     }
     
     func hideHud(){
-        DMProgressView.hideHud()
+        DMNoticeView.hideHud()
     }
 }

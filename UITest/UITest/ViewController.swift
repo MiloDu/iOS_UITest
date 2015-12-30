@@ -87,7 +87,8 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         
         tableView.addRefreshHeader(frame: CGRectMake(0 , 0, 320, 64),type: DMRefreshHeaderViewType.Dollar)
         tableView.addRefreshFooter(frame : CGRectMake(0,0,320,64))
-        tableView.delegateRefresh = self    }
+        tableView.delegateRefresh = self
+    }
     
     func testChartView(){
 //        let chartAxesView =  DMChartView.createBarView(frame: CGRectMake(0,50,self.view.width,300))

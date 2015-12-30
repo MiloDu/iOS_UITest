@@ -16,7 +16,6 @@
 		268C2E411C3175E900231D09 /* DMChartLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268C2E401C3175E900231D09 /* DMChartLineView.swift */; };
 		26B8160B1C2EBB730062692A /* CellTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B8160A1C2EBB730062692A /* CellTest.swift */; };
 		26DB0F091C2E85BC007C1E28 /* DMCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0EFF1C2E85BC007C1E28 /* DMCircleView.swift */; };
-		26DB0F0A1C2E85BC007C1E28 /* DMProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0F011C2E85BC007C1E28 /* DMProgressView.swift */; };
 		26DB0F0B1C2E85BC007C1E28 /* DMRefreshBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0F031C2E85BC007C1E28 /* DMRefreshBaseView.swift */; };
 		26DB0F0C1C2E85BC007C1E28 /* DMRefreshFooterViewDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0F041C2E85BC007C1E28 /* DMRefreshFooterViewDefault.swift */; };
 		26DB0F0D1C2E85BC007C1E28 /* DMRefreshHeaderViewDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0F051C2E85BC007C1E28 /* DMRefreshHeaderViewDefault.swift */; };
@@ -34,6 +33,7 @@
 		6368225B1C3110EB00D8A8E9 /* DMChartBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6368225A1C3110EB00D8A8E9 /* DMChartBarView.swift */; };
 		6368225F1C313D6A00D8A8E9 /* ExtensionUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6368225D1C313D6A00D8A8E9 /* ExtensionUIView.swift */; };
 		636822601C313D6A00D8A8E9 /* ExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6368225E1C313D6A00D8A8E9 /* ExtensionViewController.swift */; };
+		6368FF3D1C33AD4800F1B6BE /* DMNoticeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6368FF3C1C33AD4800F1B6BE /* DMNoticeView.swift */; };
 		63C595151C322219007AF6EA /* ExtensionString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C595141C322219007AF6EA /* ExtensionString.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,7 +47,6 @@
 		268C2E401C3175E900231D09 /* DMChartLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DMChartLineView.swift; path = DMChartView/DMChartLineView.swift; sourceTree = "<group>"; };
 		26B8160A1C2EBB730062692A /* CellTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellTest.swift; sourceTree = "<group>"; };
 		26DB0EFF1C2E85BC007C1E28 /* DMCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMCircleView.swift; sourceTree = "<group>"; };
-		26DB0F011C2E85BC007C1E28 /* DMProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMProgressView.swift; sourceTree = "<group>"; };
 		26DB0F031C2E85BC007C1E28 /* DMRefreshBaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMRefreshBaseView.swift; sourceTree = "<group>"; };
 		26DB0F041C2E85BC007C1E28 /* DMRefreshFooterViewDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMRefreshFooterViewDefault.swift; sourceTree = "<group>"; };
 		26DB0F051C2E85BC007C1E28 /* DMRefreshHeaderViewDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMRefreshHeaderViewDefault.swift; sourceTree = "<group>"; };
@@ -67,6 +66,7 @@
 		6368225A1C3110EB00D8A8E9 /* DMChartBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DMChartBarView.swift; path = DMChartView/DMChartBarView.swift; sourceTree = "<group>"; };
 		6368225D1C313D6A00D8A8E9 /* ExtensionUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtensionUIView.swift; path = Extension/ExtensionUIView.swift; sourceTree = "<group>"; };
 		6368225E1C313D6A00D8A8E9 /* ExtensionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtensionViewController.swift; path = Extension/ExtensionViewController.swift; sourceTree = "<group>"; };
+		6368FF3C1C33AD4800F1B6BE /* DMNoticeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DMNoticeView.swift; path = UITest/Widget/DMNoticeView/DMNoticeView.swift; sourceTree = SOURCE_ROOT; };
 		63C595141C322219007AF6EA /* ExtensionString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtensionString.swift; path = Extension/ExtensionString.swift; sourceTree = "<group>"; };
 		63C595161C3224D7007AF6EA /* UITest-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UITest-Bridging-Header.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -102,7 +102,7 @@
 				2621632B1C32C7E0005C14A2 /* UIArrowView.swift */,
 				636822511C30BDBE00D8A8E9 /* DMChartView */,
 				26DB0EFE1C2E85BC007C1E28 /* DMCircleView */,
-				26DB0F001C2E85BC007C1E28 /* DMProgressView */,
+				26DB0F001C2E85BC007C1E28 /* DMNoticeView */,
 				26DB0F021C2E85BC007C1E28 /* DMRefreshView */,
 			);
 			path = Widget;
@@ -116,11 +116,12 @@
 			path = DMCircleView;
 			sourceTree = "<group>";
 		};
-		26DB0F001C2E85BC007C1E28 /* DMProgressView */ = {
+		26DB0F001C2E85BC007C1E28 /* DMNoticeView */ = {
 			isa = PBXGroup;
 			children = (
-				26DB0F011C2E85BC007C1E28 /* DMProgressView.swift */,
+				6368FF3C1C33AD4800F1B6BE /* DMNoticeView.swift */,
 			);
+			name = DMNoticeView;
 			path = DMProgressView;
 			sourceTree = "<group>";
 		};
@@ -271,13 +272,13 @@
 				26DB0F111C2E85DE007C1E28 /* DMUtils.swift in Sources */,
 				26DB0F0E1C2E85BC007C1E28 /* ScrollView+DMRefresh.swift in Sources */,
 				63C595151C322219007AF6EA /* ExtensionString.swift in Sources */,
-				26DB0F0A1C2E85BC007C1E28 /* DMProgressView.swift in Sources */,
 				26F7793D1C1E4B8D000D3A2F /* ViewController.swift in Sources */,
 				26DB0F0B1C2E85BC007C1E28 /* DMRefreshBaseView.swift in Sources */,
 				2632B22E1C315C5C002A4A23 /* DMCacheUtils.swift in Sources */,
 				636822591C30D81E00D8A8E9 /* UILabelWithPadding.swift in Sources */,
 				26650A951C2F972900F132BA /* DMPathUtils.swift in Sources */,
 				26DB0F131C2E8626007C1E28 /* DMConsts.swift in Sources */,
+				6368FF3D1C33AD4800F1B6BE /* DMNoticeView.swift in Sources */,
 				6368225F1C313D6A00D8A8E9 /* ExtensionUIView.swift in Sources */,
 				26B8160B1C2EBB730062692A /* CellTest.swift in Sources */,
 				26F7793B1C1E4B8D000D3A2F /* AppDelegate.swift in Sources */,

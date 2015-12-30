@@ -10,15 +10,15 @@ import UIKit
 
 class DMChartAxesView: DMChartView {
     //用于缓存UILabel
-    private var arrayXLabel = Array<UILabelWithPadding>()
-    private var arrayYLabel = Array<UILabelWithPadding>()
+    private var _arrayXLabel = Array<UILabelWithPadding>()
+    private var _arrayYLabel = Array<UILabelWithPadding>()
     
-    internal var widthChart : CGFloat = 0
-    internal var heightChart : CGFloat = 0
-    internal var intervalX : CGFloat = 0
-    internal var intervalY : CGFloat = 0
-    internal var bottomY : CGFloat = 0          //图表底部坐标，位于X轴label之上
-    internal var countY : Int = 0               //根据valueMax和valueInterval计算
+    internal var _widthChart : CGFloat = 0
+    internal var _heightChart : CGFloat = 0
+    internal var _intervalX : CGFloat = 0
+    internal var _intervalY : CGFloat = 0
+    internal var _bottomY : CGFloat = 0          //图表底部坐标，位于X轴label之上
+    internal var _countY : Int = 0               //根据valueMax和valueInterval计算
     
     var arrayPoint = Array<CGPoint>()
     
@@ -67,22 +67,22 @@ class DMChartAxesView: DMChartView {
     
     private func compute(){
         //图表的有效宽度和高度
-        self.widthChart = self.width - self.marginLeft - self.marginRight
-        self.heightChart = self.height - self.marginBottom - self.marginTop
-        self.bottomY = self.height - self.marginBottom
+        self._widthChart = self.width - self.marginLeft - self.marginRight
+        self._heightChart = self.height - self.marginBottom - self.marginTop
+        self._bottomY = self.height - self.marginBottom
         //Y轴数量
         let countF = valueMax / valueInterval
-        self.countY = Int(ceil(countF))
+        self._countY = Int(ceil(countF))
         //像素间隔
         if(arrayData.count > 0){
-            self.intervalX = widthChart / CGFloat(arrayData.count)
+            self._intervalX = _widthChart / CGFloat(arrayData.count)
         }
-        self.intervalY = self.heightChart / countF
+        self._intervalY = self._heightChart / countF
         //数据点
         arrayPoint.removeAll()
         for i in 0 ..< arrayData.count{
-            let x = self.marginLeft + (CGFloat(i) + 0.5) * self.intervalX
-            let y = self.bottomY - (self.arrayData[i].value / self.valueMax) * self.heightChart
+            let x = self.marginLeft + (CGFloat(i) + 0.5) * self._intervalX
+            let y = self._bottomY - (self.arrayData[i].value / self.valueMax) * self._heightChart
             arrayPoint.append(CGPointMake(x, y))
         }
     }
@@ -91,7 +91,7 @@ class DMChartAxesView: DMChartView {
         let arrowLength : CGFloat = 4
         let pathAxes = UIBezierPath()
         let startX = marginLeft
-        let startY = self.bottomY + 0.5 // +0.5是为了防止被Bar覆盖
+        let startY = self._bottomY + 0.5 // +0.5是为了防止被Bar覆盖
         let endX = self.width - 1
         let endY : CGFloat = 1
         let origin = CGPointMake(startX, startY)
@@ -122,8 +122,8 @@ class DMChartAxesView: DMChartView {
         pathAxes.stroke()
         
         //Y flag
-        for i in 1 ..< self.countY + 1{
-            let y = startY - CGFloat(i) * self.intervalY
+        for i in 1 ..< self._countY + 1{
+            let y = startY - CGFloat(i) * self._intervalY
             pathAxes.moveToPoint(CGPointMake(startX, y))
             pathAxes.addLineToPoint(CGPointMake(startX + 2, y))
         }
@@ -132,27 +132,27 @@ class DMChartAxesView: DMChartView {
     
 //    private func drawXLabel(){
 //        if(arrayXString.count <= 0){
-//            for view in arrayXLabel{
+//            for view in _arrayXLabel{
 //                view.hidden = true
 //            }
 //            return
 //        }
 //        
-//        let labelWidth = self.widthChart / CGFloat(arrayXString.count)
-//        let maxCount = max(arrayXLabel.count, arrayXString.count)
+//        let labelWidth = self._widthChart / CGFloat(arrayXString.count)
+//        let maxCount = max(_arrayXLabel.count, arrayXString.count)
 //        for i in 0 ..< maxCount {
 //            if(i < arrayXString.count){
 //                var label : UILabelWithPadding!
-//                let frame = CGRectMake(CGFloat(i) * labelWidth + self.marginLeft, self.bottomY, labelWidth, self.marginBottom)
-//                if(arrayXLabel.count <= i){
+//                let frame = CGRectMake(CGFloat(i) * labelWidth + self.marginLeft, self._bottomY, labelWidth, self.marginBottom)
+//                if(_arrayXLabel.count <= i){
 //                    label = UILabelWithPadding(frame: frame)
 //                    self.addSubview(label)
-//                    arrayXLabel.append(label)
+//                    _arrayXLabel.append(label)
 //                    label.textColor = UIColor.grayColor()
 //                    label.font = UIFont.systemFontOfSize(12)
 //                    label.textAlignment = NSTextAlignment.Center
 //                }else{
-//                    label = arrayXLabel[i]
+//                    label = _arrayXLabel[i]
 //                    label.frame = frame
 //                    label.hidden = false
 //                }
@@ -161,41 +161,41 @@ class DMChartAxesView: DMChartView {
 ////                label.backgroundColor = UIColor.blackColor()
 //                self.labelForXAxes?(label: label, index: i)
 //            }else{
-//                arrayXLabel[i].hidden = true
+//                _arrayXLabel[i].hidden = true
 //            }
 //        }
 //    }
 //    private func drawYLabel(){
 //        if(valueMax <= 0){
-//            for view in arrayYLabel{
+//            for view in _arrayYLabel{
 //                view.hidden = true
 //            }
 //            return
 //        }
 //        
 //        //使用缓存机制
-//        let maxCount = max(self.arrayYLabel.count, self.countY + 1)
+//        let maxCount = max(self._arrayYLabel.count, self._countY + 1)
 //        for i in 0 ..< maxCount {
-//            if(i < self.countY + 1){
+//            if(i < self._countY + 1){
 //                var label : UILabelWithPadding!
-//                var frame = CGRectMake(0, self.bottomY - 10 - CGFloat(i) * self.intervalY, self.marginLeft, 20)
+//                var frame = CGRectMake(0, self._bottomY - 10 - CGFloat(i) * self._intervalY, self.marginLeft, 20)
 //                //不能整除时，该值为true
-//                let singleMax = (i == self.countY && !isJustDivider)
+//                let singleMax = (i == self._countY && !isJustDivider)
 //                if (singleMax){
 //                    frame.origin.y = self.marginTop
 //                    print("add max")
 //                }else if(i == 0){
 //                    frame.origin.y -= 6
 //                }
-//                if(arrayYLabel.count <= i){
+//                if(_arrayYLabel.count <= i){
 //                    //创建新的label
 //                    print("Add y = \(i)")
 //                    label = createYLabel(frame)
 //                    self.addSubview(label)
-//                    arrayYLabel.append(label)
+//                    _arrayYLabel.append(label)
 //                } else {
 //                    //使用缓存中的label
-//                    label = arrayYLabel[i]
+//                    label = _arrayYLabel[i]
 //                    label.frame = frame
 //                    label.hidden = false
 //                    print("reuse y = \(i)")
@@ -209,28 +209,27 @@ class DMChartAxesView: DMChartView {
 //                self.labelForYAxes?(label: label, index: i, isMax : isJustDivider)
 //            } else {
 //                //隐藏缓存中多余的label
-//                arrayYLabel[i].hidden = true
+//                _arrayYLabel[i].hidden = true
 //            }
 //        }
 //    }
     
     private func drawXLabel(){
         if(arrayXString.count <= 0){
-            for view in arrayXLabel{
+            for view in _arrayXLabel{
                 view.hidden = true
             }
             return
         }
         
-        let labelWidth = self.widthChart / CGFloat(arrayXString.count)
-        weak var weakself = self
-        DMCacheUtils.cacheFromArray(arrayXLabel, count: arrayXString.count) {(var label, index) -> Void in
-            if(index < weakself!.arrayXString.count){
-                let frame = CGRectMake(CGFloat(index) * labelWidth + weakself!.marginLeft, weakself!.bottomY, labelWidth, weakself!.marginBottom)
+        let labelWidth = self._widthChart / CGFloat(arrayXString.count)
+        DMCacheUtils.cacheFromArray(_arrayXLabel, count: arrayXString.count) {[weak self](var label, index) -> Void in
+            if(index < self!.arrayXString.count){
+                let frame = CGRectMake(CGFloat(index) * labelWidth + self!.marginLeft, self!._bottomY, labelWidth, self!.marginBottom)
                 if(label == nil){
                     label = UILabelWithPadding(frame: frame)
-                    weakself!.addSubview(label)
-                    weakself!.arrayXLabel.append(label)
+                    self!.addSubview(label)
+                    self!._arrayXLabel.append(label)
                     label.textColor = UIColor.grayColor()
                     label.font = UIFont.systemFontOfSize(12)
                     label.textAlignment = NSTextAlignment.Center
@@ -241,7 +240,7 @@ class DMChartAxesView: DMChartView {
                 }
                 label.tag = 1000 + index
                 label.text = String(index)
-                weakself!.labelForXAxes?(label: label, index: index)
+                self!.labelForXAxes?(label: label, index: index)
             }else{
                 label?.hidden = true
             }
@@ -250,21 +249,20 @@ class DMChartAxesView: DMChartView {
     
     private func drawYLabel(){
         if(valueMax <= 0){
-            for view in arrayYLabel{
+            for view in _arrayYLabel{
                 view.hidden = true
             }
             return
         }
         
         //使用缓存机制
-        weak var weakself = self
-        DMCacheUtils.cacheFromArray(self.arrayYLabel,count: self.countY + 1,reuse:{(var label, index) -> Void in
-            if(index < weakself!.countY + 1){
-                var frame = CGRectMake(0, weakself!.bottomY - 10 - CGFloat(index) * weakself!.intervalY, weakself!.marginLeft, 20)
+        DMCacheUtils.cacheFromArray(self._arrayYLabel,count: self._countY + 1,reuse:{[weak self](var label, index) -> Void in
+            if(index < self!._countY + 1){
+                var frame = CGRectMake(0, self!._bottomY - 10 - CGFloat(index) * self!._intervalY, self!.marginLeft, 20)
                 //不能整除时，该值为true
-                let singleMax = (index == weakself!.countY && !weakself!.isJustDivider)
+                let singleMax = (index == self!._countY && !self!.isJustDivider)
                 if (singleMax){
-                    frame.origin.y = weakself!.marginTop
+                    frame.origin.y = self!.marginTop
                     print("add max")
                 }else if(index == 0){
                     frame.origin.y -= 6
@@ -272,9 +270,9 @@ class DMChartAxesView: DMChartView {
                 if(label == nil){
                     //创建新的label
                     print("Add y = \(index)")
-                    label = self.createYLabel(frame)
-                    weakself!.addSubview(label)
-                    weakself!.arrayYLabel.append(label)
+                    label = self!.createYLabel(frame)
+                    self!.addSubview(label)
+                    self!._arrayYLabel.append(label)
                 } else {
                     //使用缓存中的label
                     label.frame = frame
@@ -283,11 +281,11 @@ class DMChartAxesView: DMChartView {
                 }
                 label.tag = 2000 + index
                 if(!singleMax){
-                    label.text = String(CGFloat(index) * weakself!.valueInterval)
+                    label.text = String(CGFloat(index) * self!.valueInterval)
                 }else{
-                    label.text = String(CGFloat(weakself!.valueMax))
+                    label.text = String(CGFloat(self!.valueMax))
                 }
-                weakself!.labelForYAxes?(label: label, index: index, isMax : weakself!.isJustDivider)
+                self!.labelForYAxes?(label: label, index: index, isMax : self!.isJustDivider)
             } else {
                 //隐藏缓存中多余的label
                 label?.hidden = true
