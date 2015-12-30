@@ -12,7 +12,10 @@ class DMChartView: UIView {
     static func createBarView(frame frame : CGRect)-> DMChartBarView{
         return DMChartBarView(frame : frame)
     }
-    
+    static func createLineView(frame frame : CGRect)-> DMChartLineView{
+        return DMChartLineView(frame : frame)
+    }
+
     var valueMax : CGFloat = 10
     var valueInterval : CGFloat = 1
     

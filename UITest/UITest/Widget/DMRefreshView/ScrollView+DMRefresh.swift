@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIScrollView {
-    private struct RefreshKey {
+    private struct _RefreshKey {
         static var Delegate = "Delegate"
         static var Header = "Header"
         static var Footer = "Footer"
@@ -17,34 +17,34 @@ extension UIScrollView {
     
     var delegateRefresh: DMRefreshDelegate? {
         get {
-            return objc_getAssociatedObject(self, &RefreshKey.Delegate) as? DMRefreshDelegate
+            return objc_getAssociatedObject(self, &_RefreshKey.Delegate) as? DMRefreshDelegate
         }
         set (delegate) {
-            objc_setAssociatedObject(self, &RefreshKey.Delegate, delegate, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &_RefreshKey.Delegate, delegate, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
     var refreshHeader : DMRefreshHeaderViewBase? {
         get{
-            return objc_getAssociatedObject(self, &RefreshKey.Header) as? DMRefreshHeaderViewBase
+            return objc_getAssociatedObject(self, &_RefreshKey.Header) as? DMRefreshHeaderViewBase
         }
         set(view){
-            objc_setAssociatedObject(self, &RefreshKey.Header, view, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &_RefreshKey.Header, view, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
     var refreshFooter : DMRefreshFooterViewBase? {
         get{
-            return objc_getAssociatedObject(self, &RefreshKey.Footer) as? DMRefreshFooterViewBase
+            return objc_getAssociatedObject(self, &_RefreshKey.Footer) as? DMRefreshFooterViewBase
         }
         set(view){
-            objc_setAssociatedObject(self, &RefreshKey.Footer, view, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &_RefreshKey.Footer, view, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
     
     //注意：添加header或者footer必须在设置UIScrollView的contentInset属性之后
-    func addRefreshHeader(frame frame: CGRect){
-        let header = DMRefreshBaseView.createHeaderView(frame: frame)
+    func addRefreshHeader(frame frame: CGRect, type : DMRefreshHeaderViewType = DMRefreshHeaderViewType.Default){
+        let header = DMRefreshBaseView.createHeaderView(frame: frame, type: type)
         self.refreshHeader = header
         self.addSubview(header)
     }

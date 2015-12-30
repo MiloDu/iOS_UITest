@@ -12,12 +12,12 @@ class DMCircleView : UIView {
     let PI = CGFloat(M_PI)
     let PI_2 = CGFloat(M_PI * 0.5)
     //Center Point
-    private var touchCenter : CGPoint!
-    private var radius : CGFloat = 0
-    private var layerProgress : CAShapeLayer!
-    private var viewPointer : UIView!
-    private var lastLocation : CGPoint = CGPointMake(CGFloat.min,CGFloat.min)
-    private var currentAngle : CGFloat = 0
+    private var _touchCenter : CGPoint!
+    private var _radius : CGFloat = 0
+    private var _layerProgress : CAShapeLayer!
+    private var _viewPointer : UIView!
+    private var _lastLocation : CGPoint = CGPointMake(CGFloat.min,CGFloat.min)
+    private var _currentAngle : CGFloat = 0
     
     var minValue : CGFloat = 0.0
     var maxValue : CGFloat = 10.0
@@ -29,7 +29,7 @@ class DMCircleView : UIView {
             if(progress != oldValue){
                 CATransaction.begin()
                 CATransaction.setDisableActions(true)
-                layerProgress.strokeEnd = progress
+                _layerProgress.strokeEnd = progress
                 CATransaction.commit()
             }
         }
@@ -37,86 +37,86 @@ class DMCircleView : UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        config()
+        _config()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        config()
+        _config()
 //        fatalError("init(coder:) has not been implemented")
     }
     
     override func drawRect(rect: CGRect) {
-        let path = createPath()
+        let path = _createPath()
         path.lineWidth = lineWidth
         UIColor.grayColor().set()
         path.stroke()
     }
     
-    private func config(){
+    private func _config(){
         self.backgroundColor = UIColor.clearColor()
         self.multipleTouchEnabled = false
         
-        radius = self.bounds.width * 0.4
-        touchCenter = CGPointMake(self.bounds.width * 0.5, self.bounds.height * 0.5)
+        _radius = self.bounds.width * 0.4
+        _touchCenter = CGPointMake(self.bounds.width * 0.5, self.bounds.height * 0.5)
         interval = 1 / maxValue
-        print("touchCenter = \(touchCenter),radius = \(radius),interval = \(interval)")
-        configProgressLayer()
-        configPointer()
+        print("_touchCenter = \(_touchCenter),_radius = \(_radius),interval = \(interval)")
+        _configProgressLayer()
+        _configPointer()
         
-        let dragGestureRecognizer = UIPanGestureRecognizer(target: self, action: "onDrag:")
+        let dragGestureRecognizer = UIPanGestureRecognizer(target: self, action: "_onDrag:")
         self.addGestureRecognizer(dragGestureRecognizer)
     }
     
-    private func configProgressLayer(){
-        layerProgress = CAShapeLayer()
-        layerProgress.frame = self.bounds
+    private func _configProgressLayer(){
+        _layerProgress = CAShapeLayer()
+        _layerProgress.frame = self.bounds
         
-        let path = createPath(true)
-        layerProgress.path = path.CGPath
-        layerProgress.lineWidth = lineWidth
-        layerProgress.lineCap = kCALineCapRound
-        layerProgress.fillColor = UIColor.clearColor().CGColor
-        layerProgress.strokeColor = UIColor.redColor().CGColor
-//        layerProgress.strokeEnd = 0.0
-        layerProgress.strokeEnd = progress
+        let path = _createPath(true)
+        _layerProgress.path = path.CGPath
+        _layerProgress.lineWidth = lineWidth
+        _layerProgress.lineCap = kCALineCapRound
+        _layerProgress.fillColor = UIColor.clearColor().CGColor
+        _layerProgress.strokeColor = UIColor.redColor().CGColor
+//        _layerProgress.strokeEnd = 0.0
+        _layerProgress.strokeEnd = progress
         
         let layer = CAGradientLayer()
         layer.frame = self.bounds
         layer.colors = [UIColor.blueColor().CGColor,UIColor.greenColor().CGColor]
         layer.startPoint = CGPointZero
         layer.endPoint = CGPointMake(1, 0)
-        layer.mask = layerProgress
+        layer.mask = _layerProgress
         self.layer.addSublayer(layer)
     }
     
-    private func configPointer(){
-        viewPointer = UIView(frame: self.bounds)
-        let rect = viewPointer.bounds
-        let imageView = UIImageView(frame: CGRectMake(rect.width * 0.4, rect.height * 0.2, viewPointer.bounds.size.width * 0.2, viewPointer.bounds.size.height * 0.3))
+    private func _configPointer(){
+        _viewPointer = UIView(frame: self.bounds)
+        let rect = _viewPointer.bounds
+        let imageView = UIImageView(frame: CGRectMake(rect.width * 0.4, rect.height * 0.2, _viewPointer.bounds.size.width * 0.2, _viewPointer.bounds.size.height * 0.3))
         
         imageView.image =  UIImage(named: "pointer")
-        viewPointer.addSubview(imageView)
+        _viewPointer.addSubview(imageView)
         
         let label = UILabel(frame: CGRectMake(0,rect.height * 0.5,rect.width,rect.height * 0.5))
         label.textAlignment = NSTextAlignment.Center
         label.text = "转动吧少年"
-        viewPointer.addSubview(label)
-        addSubview(viewPointer)
-        rotate()
+        _viewPointer.addSubview(label)
+        addSubview(_viewPointer)
+        _rotate()
     }
     
-    private func rotate(){
-        currentAngle = -PI_2 + progress * PI
-        viewPointer.transform = CGAffineTransformMakeRotation(currentAngle)
+    private func _rotate(){
+        _currentAngle = -PI_2 + progress * PI
+        _viewPointer.transform = CGAffineTransformMakeRotation(_currentAngle)
     }
     
-    private func createPath(isSemi : Bool = false) -> UIBezierPath{
+    private func _createPath(isSemi : Bool = false) -> UIBezierPath{
         var endAngle = PI
         if(isSemi){
             endAngle = 0
         }
-        let path = UIBezierPath(arcCenter: touchCenter, radius: radius, startAngle: -PI, endAngle: endAngle, clockwise: true)
+        let path = UIBezierPath(arcCenter: _touchCenter, radius: _radius, startAngle: -PI, endAngle: endAngle, clockwise: true)
         path.lineWidth = lineWidth
         return path
     }
@@ -129,22 +129,22 @@ class DMCircleView : UIView {
         return anim
     }
     
-    func onDrag(sender : UIPanGestureRecognizer){
+    func _onDrag(sender : UIPanGestureRecognizer){
         let location =  sender.locationInView(self)
-        let dir = pointMinus(location, p2: touchCenter)
-        let angle = computeRotate(pointMinus(lastLocation, p2: touchCenter), to: dir)
-        currentAngle += angle
-        if(currentAngle >= PI_2){
-            currentAngle = PI_2
-        }else if(currentAngle <= -PI_2){
-            currentAngle = -PI_2
+        let dir = _pointMinus(location, p2: _touchCenter)
+        let angle = _computeRotate(_pointMinus(_lastLocation, p2: _touchCenter), to: dir)
+        _currentAngle += angle
+        if(_currentAngle >= PI_2){
+            _currentAngle = PI_2
+        }else if(_currentAngle <= -PI_2){
+            _currentAngle = -PI_2
         }
-        viewPointer.transform = CGAffineTransformMakeRotation(currentAngle)
-        progress = (currentAngle + PI_2) / PI
-        lastLocation = location
+        _viewPointer.transform = CGAffineTransformMakeRotation(_currentAngle)
+        progress = (_currentAngle + PI_2) / PI
+        _lastLocation = location
     }
 
-    private func computeRotate(from : CGPoint, to : CGPoint)->CGFloat{
+    private func _computeRotate(from : CGPoint, to : CGPoint)->CGFloat{
         let epsilon :  CGFloat = 1e-6
         let nyPI : CGFloat = acos(-1.0)
         var angle : CGFloat = 0
@@ -169,18 +169,18 @@ class DMCircleView : UIView {
         return angle
     }
     
-    private func pointMinus(p1 : CGPoint, p2 : CGPoint) -> CGPoint{
+    private func _pointMinus(p1 : CGPoint, p2 : CGPoint) -> CGPoint{
         return CGPointMake(p1.x - p2.x, p1.y - p2.y)
     }
     
-    private func pointAdd(p1 : CGPoint, p2 : CGPoint) ->CGPoint{
+    private func _pointAdd(p1 : CGPoint, p2 : CGPoint) ->CGPoint{
         return CGPointMake(p1.x + p2.x, p1.y + p2.y)
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
 //        print("count = \(touches.count)")
         for touch in touches{
-            lastLocation = touch.locationInView(self)
+            _lastLocation = touch.locationInView(self)
             break
         }
     }

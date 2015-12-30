@@ -24,9 +24,10 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         self.edgesForExtendedLayout = UIRectEdge.None
         
 //        testCircleView()
-//        testRefresh()
+        testRefresh()
 //        test3D()
-        testChartView()
+//        testChartView()
+//        testEncryt()
     }
     
     func testCircleView(){
@@ -74,15 +75,24 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         tableView.tableFooterView = UIView() //隐藏无效的分割线
         tableView.dataSource = self
         self.view.addSubview(tableView)
+
+//        let headerView = UIView(frame: CGRectMake(0,0,320,100))
+//        headerView.backgroundColor = UIColor.yellowColor()
+//        tableView.tableHeaderView = headerView
+//        let footerView = UIView(frame: CGRectMake(0,0,320,100))
+//        footerView.backgroundColor = UIColor.greenColor()
+//        tableView.tableFooterView = footerView
+
+        tableView.contentInset = UIEdgeInsetsMake(30, 0, 0, 0)
         
-        tableView.addRefreshHeader(frame: CGRectMake(0 , 0, 320, 64))
+        tableView.addRefreshHeader(frame: CGRectMake(0 , 0, 320, 64),type: DMRefreshHeaderViewType.Dollar)
         tableView.addRefreshFooter(frame : CGRectMake(0,0,320,64))
         tableView.delegateRefresh = self
-        print("table = \(tableView.frame)")
     }
     
     func testChartView(){
-        let chartAxesView =  DMChartView.createBarView(frame: CGRectMake(0,50,self.view.width,300))
+//        let chartAxesView =  DMChartView.createBarView(frame: CGRectMake(0,50,self.view.width,300))
+        let chartAxesView =  DMChartView.createLineView(frame: CGRectMake(0,50,self.view.width,300))
         chartAxesView.backgroundColor = UIColor.lightGrayColor()
         chartAxesView.tag = 200
         self.view.addSubview(chartAxesView)
@@ -98,7 +108,7 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         configChartData(chartAxesView, count: 5, maxValue: 10)
     }
     
-    private func configChartData(chartView: DMChartBarView, count : Int, maxValue : CGFloat){
+    private func configChartData(chartView: DMChartAxesView, count : Int, maxValue : CGFloat){
         chartView.arrayXString.removeAll()
         chartView.arrayData.removeAll()
         for i in 0 ..< count{
@@ -112,6 +122,17 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         chartView.valueInterval = maxValue / CGFloat(count)
     }
     
+    func testEncryt(){
+        let str = "hahahaha"
+        let str1 = str.toMD5()
+        print("str1 = \(str1)")
+        let str2 = str.toBase64Encode()
+        print("str2 = \(str2)")
+        let str3 = "aGFoYWhhaGE=".toBase64Decode()
+        print("str3 = \(str3)")
+        print("str4 = \(str.toBase64Decode())")
+    }
+    
     func onTap(recognizer : UITapGestureRecognizer){
         print("onTap = \(recognizer.view?.tag)")
         if(recognizer.view?.tag == 100){
@@ -119,13 +140,16 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
                 let view = self.view.viewWithTag(100)!
                 let rotationT = CATransform3DRotate(view.layer.transform, DMConsts.PI, 1, 0, 0)
                 //        imageView.layer.transform = rotationT
-                let rotationPers = DMLayerUtils.CATransform3DPerspective(rotationT)
+                let rotationPers = DMAnimationUtils.CATransform3DPerspective(rotationT)
                 //        imageView.layer.zPosition = 100
                 view.layer.transform = rotationPers
             }
         }else if(recognizer.view?.tag == 200){
-            let view = self.view.viewWithTag(200) as! DMChartBarView
+            let view = self.view.viewWithTag(200) as! DMChartAxesView
             configChartData(view, count: count++, maxValue: 40)
+            if(view.arrayXString.count >= 10){
+                count = 2
+            }
             view.setNeedsDisplay()
         }
     }

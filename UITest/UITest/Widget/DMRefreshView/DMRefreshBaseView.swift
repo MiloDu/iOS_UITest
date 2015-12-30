@@ -25,17 +25,26 @@ enum DMRefreshViewType{
     }
 }
 
+enum DMRefreshHeaderViewType{
+    case Default
+    case Dollar
+}
+
 protocol DMRefreshDelegate : NSObjectProtocol{
     func onRefresh(viewType : DMRefreshViewType)
 }
 
 let kDMContentOffset = "contentOffset"
 let kDMContentSize = "contentSize"
-let DMAnimationDuraiton = 0.2
 
 class DMRefreshBaseView: UIView {
-    static func createHeaderView(frame frame : CGRect) -> DMRefreshHeaderViewBase{
-        return DMRefreshHeaderViewDefault(frame: frame)
+    static func createHeaderView(frame frame : CGRect, type: DMRefreshHeaderViewType = DMRefreshHeaderViewType.Default) -> DMRefreshHeaderViewBase{
+        switch type{
+        case .Dollar:
+            return DMRefreshHeaderViewDollar(frame: frame)
+        default:
+            return DMRefreshHeaderViewDefault(frame: frame)
+        }
     }
     
     static func createFooterView(frame frame : CGRect) -> DMRefreshFooterViewBase{
@@ -43,6 +52,7 @@ class DMRefreshBaseView: UIView {
     }
 
     @IBInspectable var viewTypeRawValue : Int = 1            //用于nib文件中与ViewType对应，1 = Header, 2 = Footer
+    let animationDuraiton = 0.2
     var viewType : DMRefreshViewType = DMRefreshViewType.Header
     var scrollView : UIScrollView!
     var scrollViewOriginalInset : UIEdgeInsets!
@@ -54,22 +64,22 @@ class DMRefreshBaseView: UIView {
     
 //    override init(frame: CGRect) {
 //        super.init(frame: frame)
-//        config()
+//        _config()
 //    }
 //
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.viewType = DMRefreshViewType.fromRawValue(self.viewTypeRawValue)
-        config()
+        _config()
     }
     
     init(frame: CGRect, viewType : DMRefreshViewType) {
         super.init(frame: frame)
         self.viewType = viewType
-        config()
+        _config()
     }
     
-    internal func config(){
+    internal func _config(){
         originalHeight = frame.size.height
     }
     
@@ -94,16 +104,17 @@ class DMRefreshBaseView: UIView {
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if(keyPath == kDMContentOffset){
-            self.onContentOffsetChanged()
+            self._onContentOffsetChanged()
         }
     }
     
-    internal func onContentOffsetChanged(){} //子类实现，用于监听UIScrollView contentOffset变化以改变状态
+    internal func _onContentOffsetChanged(){} //子类实现，用于监听UIScrollView contentOffset变化以改变状态
     //状态切换，在子类中实现各种效果
-    internal func onNormalFromRefreshing(){}
-    internal func onNormalFromRelease(){}
-    internal func onReleaseFromNormal(){}
-    internal func onRefreshing(){}
+    internal func _onStateChangeWithOffset(offset : CGPoint){}       //contentOffset发生变化且Header或Footer显示出来
+    internal func _onNormalFromRefreshing(){}
+    internal func _onNormalFromRelease(){}
+    internal func _onReleaseFromNormal(){}
+    internal func _onRefreshing(){}
     
     //开始刷新
     func beginRefresh(){
@@ -154,24 +165,24 @@ class DMRefreshHeaderViewBase: DMRefreshBaseView {
             case DMRefreshState.Normal:
                 if(oldValue == DMRefreshState.Refreshing){
                     //Refresh End
-                    onNormalFromRefreshing()
-                    UIView.animateWithDuration(DMAnimationDuraiton, animations: { () -> Void in
+                    _onNormalFromRefreshing()
+                    UIView.animateWithDuration(animationDuraiton, animations: { () -> Void in
                         var contentInset = self.scrollView.contentInset
                         contentInset.top = self.scrollViewOriginalInset.top
                         self.scrollView.contentInset = contentInset
                     })
                 }else{
                     //Drag change
-                    onNormalFromRelease()
+                    _onNormalFromRelease()
                 }
                 break
             case DMRefreshState.ReleaseToRefresh:
                 //Drag change
-                onReleaseFromNormal()
+                _onReleaseFromNormal()
                 break
             case DMRefreshState.Refreshing:
-                onRefreshing()
-                UIView.animateWithDuration(DMAnimationDuraiton, animations: { () -> Void in
+                _onRefreshing()
+                UIView.animateWithDuration(animationDuraiton, animations: { () -> Void in
                     var contentInset = self.scrollView.contentInset
                     contentInset.top = self.scrollViewOriginalInset.top + self.originalHeight
                     self.scrollView.contentInset = contentInset
@@ -195,17 +206,17 @@ class DMRefreshHeaderViewBase: DMRefreshBaseView {
 
     override func willMoveToSuperview(newSuperview: UIView?) {
         super.willMoveToSuperview(newSuperview)
-        adjustFrame()
+        _adjustFrame()
     }
     
-    internal func adjustFrame(){
+    internal func _adjustFrame(){
         var rect = self.frame
         rect.origin.y = -rect.size.height - scrollViewOriginalInset.top
         self.frame = rect
     }
     
-    override func onContentOffsetChanged() {
-        super.onContentOffsetChanged()
+    override func _onContentOffsetChanged() {
+        super._onContentOffsetChanged()
         if(self.hidden){
             return
         }
@@ -214,15 +225,16 @@ class DMRefreshHeaderViewBase: DMRefreshBaseView {
             return
         }
         
-        self.changeStateWithOffset()
+        self._changeStateWithOffset()
     }
     
-    private func changeStateWithOffset(){
+    private func _changeStateWithOffset(){
         let offsetY = self.scrollView.contentOffset.y
         let threshold = -scrollViewOriginalInset.top //标识是否显示出header
         if(offsetY >= threshold){
             return
         }
+//        print("offset header = \(offsetY)")
         if(self.scrollView.dragging){
             if(self.state == DMRefreshState.Normal && offsetY < threshold - originalHeight){
                 // Normal -> ReleaseToRefresh
@@ -236,6 +248,7 @@ class DMRefreshHeaderViewBase: DMRefreshBaseView {
                 self.state = DMRefreshState.Refreshing
             }
         }
+        self._onStateChangeWithOffset(CGPointMake(self.scrollView.contentOffset.x, threshold - offsetY))
     }
 }
 
@@ -258,26 +271,26 @@ class DMRefreshFooterViewBase: DMRefreshBaseView {
             case DMRefreshState.Normal:
                 if(oldValue == DMRefreshState.Refreshing){
                     //DMRefresh End
-                    onNormalFromRefreshing()
-                    UIView.animateWithDuration(DMAnimationDuraiton, animations: { () -> Void in
+                    _onNormalFromRefreshing()
+                    UIView.animateWithDuration(animationDuraiton, animations: { () -> Void in
                         var contentInset = self.scrollView.contentInset
                         contentInset.bottom = self.scrollViewOriginalInset.bottom
                         self.scrollView.contentInset = contentInset
                     })
                 }else{
                     //Drag change
-                    onNormalFromRelease()
+                    _onNormalFromRelease()
                 }
                 break
             case DMRefreshState.ReleaseToRefresh:
                 //Drag change
-                onReleaseFromNormal()
+                _onReleaseFromNormal()
                 break
             case DMRefreshState.Refreshing:
-                onRefreshing()
-                UIView.animateWithDuration(DMAnimationDuraiton, animations: { () -> Void in
+                _onRefreshing()
+                UIView.animateWithDuration(animationDuraiton, animations: { () -> Void in
                     var bottom:CGFloat = self.frame.size.height + self.scrollViewOriginalInset.bottom
-                    let maxOffsetY = self.computeMaxOffsetY()
+                    let maxOffsetY = self._computeMaxOffsetY()
                     if maxOffsetY < 0 {
                         bottom = bottom - maxOffsetY
                     }
@@ -300,7 +313,7 @@ class DMRefreshFooterViewBase: DMRefreshBaseView {
 
     override func willMoveToSuperview(newSuperview: UIView?) {
         super.willMoveToSuperview(newSuperview)
-        adjustFrame()
+        _adjustFrame()
         if(self.superview != nil){
             self.superview?.removeObserver(self, forKeyPath: kDMContentSize)
         }
@@ -310,7 +323,7 @@ class DMRefreshFooterViewBase: DMRefreshBaseView {
         }
     }
     
-    internal func adjustFrame(){
+    internal func _adjustFrame(){
         let y = max(self.scrollView.contentSize.height, self.scrollView.frame.size.height) + scrollViewOriginalInset.bottom
         var rect = self.frame
         rect.origin.y = y
@@ -325,11 +338,11 @@ class DMRefreshFooterViewBase: DMRefreshBaseView {
     }
     
     private func onContentSizeChanged(){
-        adjustFrame()
+        _adjustFrame()
     }
     
-    override func onContentOffsetChanged() {
-        super.onContentOffsetChanged()
+    override func _onContentOffsetChanged() {
+        super._onContentOffsetChanged()
         if(self.hidden){
             return
         }
@@ -338,12 +351,12 @@ class DMRefreshFooterViewBase: DMRefreshBaseView {
             return
         }
         
-        self.changeStateWithOffset()
+        self._changeStateWithOffset()
     }
     
-    private func changeStateWithOffset(){
+    private func _changeStateWithOffset(){
         let offsetY = self.scrollView.contentOffset.y
-        let maxOffsetY = computeMaxOffsetY()
+        let maxOffsetY = _computeMaxOffsetY()
         var threshold : CGFloat = 0 //标识是否显示出
         if(maxOffsetY > 0){
             threshold = maxOffsetY
@@ -351,6 +364,7 @@ class DMRefreshFooterViewBase: DMRefreshBaseView {
         if(offsetY <= threshold){
             return
         }
+        print("offset footer = \(offsetY)")
         if(self.scrollView.dragging){
             if(self.state == DMRefreshState.Normal && offsetY > threshold + originalHeight){
                 // Normal -> ReleaseToDMRefresh
@@ -364,9 +378,10 @@ class DMRefreshFooterViewBase: DMRefreshBaseView {
                 self.state = DMRefreshState.Refreshing
             }
         }
+        self._onStateChangeWithOffset(CGPointMake(self.scrollView.contentOffset.x, offsetY - threshold))
     }
     
-    private func computeMaxOffsetY() ->CGFloat{
+    private func _computeMaxOffsetY() ->CGFloat{
         let maxOffsetY = self.scrollView.contentSize.height - (self.scrollView.frame.size.height + self.scrollViewOriginalInset.top + scrollViewOriginalInset.bottom)
         return maxOffsetY
     }
