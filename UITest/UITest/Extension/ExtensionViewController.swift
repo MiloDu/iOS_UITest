@@ -90,13 +90,13 @@ extension UIViewController {
         }
     }
     
-    func addObsever(){
+    func registerKeyboardObserver(){
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "_onKeyboardShow:", name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "_onKeyboardHide:", name: UIKeyboardWillHideNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "_onEditEnd", name: UITextFieldTextDidEndEditingNotification, object: nil)
     }
     
-    func removeObsever(){
+    func unregisterKeyboardObserver(){
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
     }

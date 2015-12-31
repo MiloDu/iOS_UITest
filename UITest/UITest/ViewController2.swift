@@ -14,7 +14,7 @@ class ViewController2: UIViewController, UITextFieldDelegate{
         super.viewDidLoad()
         print("test = \(self.view.backgroundColor)")
         self.view.backgroundColor = UIColor.whiteColor()
-        addObsever()
+        registerKeyboardObserver()()
         let tf = UITextField(frame: CGRectMake(10,300,320,30))
         tf.tag = 1
         tf.delegate = self
