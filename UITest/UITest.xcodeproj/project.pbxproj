@@ -27,6 +27,7 @@
 		26F779401C1E4B8D000D3A2F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26F7793E1C1E4B8D000D3A2F /* Main.storyboard */; };
 		26F779421C1E4B8D000D3A2F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26F779411C1E4B8D000D3A2F /* Assets.xcassets */; };
 		26F779451C1E4B8D000D3A2F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26F779431C1E4B8D000D3A2F /* LaunchScreen.storyboard */; };
+		26FC2F2E1C3414D4007F3626 /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FC2F2D1C3414D4007F3626 /* ViewController2.swift */; };
 		636822561C30C56200D8A8E9 /* DMChartAxesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636822541C30C56200D8A8E9 /* DMChartAxesView.swift */; };
 		636822571C30C56200D8A8E9 /* DMChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636822551C30C56200D8A8E9 /* DMChartView.swift */; };
 		636822591C30D81E00D8A8E9 /* UILabelWithPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636822581C30D81E00D8A8E9 /* UILabelWithPadding.swift */; };
@@ -60,6 +61,7 @@
 		26F779411C1E4B8D000D3A2F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		26F779441C1E4B8D000D3A2F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		26F779461C1E4B8D000D3A2F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		26FC2F2D1C3414D4007F3626 /* ViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
 		636822541C30C56200D8A8E9 /* DMChartAxesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DMChartAxesView.swift; path = DMChartView/DMChartAxesView.swift; sourceTree = "<group>"; };
 		636822551C30C56200D8A8E9 /* DMChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DMChartView.swift; path = DMChartView/DMChartView.swift; sourceTree = "<group>"; };
 		636822581C30D81E00D8A8E9 /* UILabelWithPadding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelWithPadding.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 			children = (
 				26F7793A1C1E4B8D000D3A2F /* AppDelegate.swift */,
 				26F7793C1C1E4B8D000D3A2F /* ViewController.swift */,
+				26FC2F2D1C3414D4007F3626 /* ViewController2.swift */,
 				26B8160A1C2EBB730062692A /* CellTest.swift */,
 				6368225C1C313D4100D8A8E9 /* Extension */,
 				26DB0EFC1C2E85BC007C1E28 /* Util */,
@@ -288,6 +291,7 @@
 				26DB0F091C2E85BC007C1E28 /* DMCircleView.swift in Sources */,
 				636822561C30C56200D8A8E9 /* DMChartAxesView.swift in Sources */,
 				636822601C313D6A00D8A8E9 /* ExtensionViewController.swift in Sources */,
+				26FC2F2E1C3414D4007F3626 /* ViewController2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

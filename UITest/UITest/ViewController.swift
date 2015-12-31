@@ -24,10 +24,15 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         self.edgesForExtendedLayout = UIRectEdge.None
         
 //        testCircleView()
-        testRefresh()
+//        testRefresh()
 //        test3D()
 //        testChartView()
 //        testEncryt()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+//        self.presentViewController(ViewController2(), animated: true, completion: nil)
     }
     
     func testCircleView(){
@@ -76,18 +81,21 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         tableView.dataSource = self
         self.view.addSubview(tableView)
 
-//        let headerView = UIView(frame: CGRectMake(0,0,320,100))
-//        headerView.backgroundColor = UIColor.yellowColor()
-//        tableView.tableHeaderView = headerView
-//        let footerView = UIView(frame: CGRectMake(0,0,320,100))
-//        footerView.backgroundColor = UIColor.greenColor()
-//        tableView.tableFooterView = footerView
+        let headerView = UIView(frame: CGRectMake(0,0,320,100))
+        headerView.backgroundColor = UIColor.yellowColor()
+        tableView.tableHeaderView = headerView
+        let footerView = UIView(frame: CGRectMake(0,0,320,200))
+        footerView.backgroundColor = UIColor.greenColor()
+        tableView.tableFooterView = footerView
 
-        tableView.contentInset = UIEdgeInsetsMake(30, 0, 0, 0)
+        tableView.contentInset = UIEdgeInsetsMake(40, 0, 0, 0)
         
         tableView.addRefreshHeader(frame: CGRectMake(0 , 0, 320, 64),type: DMRefreshHeaderViewType.Dollar)
         tableView.addRefreshFooter(frame : CGRectMake(0,0,320,64))
         tableView.delegateRefresh = self
+        print("frame = \(tableView.frame)")
+        print("size = \(tableView.contentSize)")
+        print("offset = \(tableView.contentOffset)")
     }
     
     func testChartView(){
@@ -159,10 +167,12 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         if(sender.tag == 1){
             showHudLoading()
         }else if(sender.tag == 2){
-            showHudOK()
+//            showHudOK()
+            self.presentViewController(ViewController2(), animated: true, completion: nil)
         }else if(sender.tag == 3){
 //            showHudError()
-            showHudCustom()
+//            showHudCustom()
+            toast("toast = \(NSDate().timeIntervalSince1970)")
         }
     }
     
@@ -170,7 +180,7 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         tableView.beginRefresh()
     }
 
-    //#prama RefreshDelegate
+    //MARK: RefreshDelegate
     func onRefresh(type : DMRefreshViewType){
         print("onRefresh = \(type)")
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
@@ -195,7 +205,7 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         self.tableView.endRefresh(DMRefreshViewType.Footer)
     }
     
-    //prama UITableViewDataSource
+    //MARK: UITableViewDataSource
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         let cell = tableView.dequeueReusableCellWithIdentifier(kCell)!
         cell.textLabel?.text = array[indexPath.row]
