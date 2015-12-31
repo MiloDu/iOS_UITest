@@ -67,6 +67,10 @@ extension UIViewController {
         DMNoticeView.showHud(DMNoticeType.Custom, text: "", isTouchToDismiss: true)
     }
     
+    func toast(text: String){
+        DMNoticeView.toast(text)
+    }
+    
     func hideHud(){
         DMNoticeView.hideHud()
     }

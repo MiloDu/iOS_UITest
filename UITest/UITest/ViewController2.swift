@@ -14,7 +14,7 @@ class ViewController2: UIViewController, UITextFieldDelegate{
         super.viewDidLoad()
         print("test = \(self.view.backgroundColor)")
         self.view.backgroundColor = UIColor.whiteColor()
-        registerKeyboardObserver()()
+        registerKeyboardObserver()
         let tf = UITextField(frame: CGRectMake(10,300,320,30))
         tf.tag = 1
         tf.delegate = self
@@ -37,8 +37,15 @@ class ViewController2: UIViewController, UITextFieldDelegate{
         self.view.addSubview(tf3)
     }
     
-    func textFieldDidEnd(){
-        print("end")
+    func textFieldShouldReturn(textField: UITextField) -> Bool{
+        if textField.tag == 1 {
+            view.viewWithTag(2)?.becomeFirstResponder()
+        }else if textField.tag == 2 {
+            view.viewWithTag(3)?.becomeFirstResponder()
+        }else {
+            hideKeyboard()
+        }
+        return true
     }
 }
 

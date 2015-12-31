@@ -13,12 +13,23 @@ enum DMNoticeType{
     case OK
     case Error
     case Custom
+    case Toast
 }
 
 class DMNoticeView : UIView{
     private static var _window : UIWindow!
     private static var _dic = Dictionary<DMNoticeType, DMNoticeView>()
     private static var _currentView : DMNoticeView!
+    private static var timer: NSTimer!
+//    static func toast(text: String){
+//        if timer != nil{
+//            timer.invalidate()
+//            print("invalidate")
+//        }
+//        showHud(DMNoticeType.Toast, text: text, isTouchToDismiss: false)
+//        timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "hideHud", userInfo: nil, repeats: false)
+//    }
+    
     static func showHud(type : DMNoticeType = DMNoticeType.Loading, text : String = "", isTouchToDismiss : Bool = false){
         if(_window == nil){
             _window = UIWindow()
@@ -62,19 +73,28 @@ class DMNoticeView : UIView{
         _window.hidden = true
     }
     
-//    private static var hudView : MyProgressView!
-//    static func showHud(isTouchToDismiss : Bool = false){
-//        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//        let _window = appDelegate.window! as UIWindow
-//        if(hudView == nil){
-//            hudView = MyProgressView(frame: UIScreen.mainScreen().bounds)
-//            _window.addSubview(hudView!)
-//        }
-//        _window.bringSubviewToFront(hudView!)
-//        hudView?.isTouchToDismiss = isTouchToDismiss
-//        hudView?.show()
-//    }
+    static func toast(text: String){
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let _window = appDelegate.window! as UIWindow
+        if _dic[DMNoticeType.Toast] == nil {
+            let view = DMNoticeView(frame: _window.bounds, type: DMNoticeType.Toast)
+            _dic[DMNoticeType.Toast] = view
+        }
+        if _dic[DMNoticeType.Toast]?.superview == nil{
+            _window.addSubview(_dic[DMNoticeType.Toast]!)
+        }
+        _window.bringSubviewToFront(_dic[DMNoticeType.Toast]!)
+        _dic[DMNoticeType.Toast]?.start(text)
+        if timer != nil{
+            timer.invalidate()
+            timer = nil
+        }
+        timer = NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "_hideToast", userInfo: nil, repeats: false)
+    }
     
+    static func _hideToast(){
+        _dic[DMNoticeType.Toast]?.removeFromSuperview()
+    }
     
     let sWidth : CGFloat = UIScreen.mainScreen().bounds.width
     let sHeight : CGFloat = UIScreen.mainScreen().bounds.height
@@ -114,8 +134,13 @@ class DMNoticeView : UIView{
     
     private func _config(){
         self.backgroundColor = UIColor.clearColor()
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: "_onTap")
-        self.addGestureRecognizer(tapRecognizer)
+        if _type != DMNoticeType.Toast{
+            let tapRecognizer = UITapGestureRecognizer(target: self, action: "_onTap")
+            self.addGestureRecognizer(tapRecognizer)
+        }else{
+            self.userInteractionEnabled = false
+            self.window?.userInteractionEnabled = false
+        }
         centerFrame = CGRectMake(sWidth * 0.5 - B_WIDTH * 0.5, sHeight * 0.5 - B_HEIGHT * 0.5, B_WIDTH, B_HEIGHT)
         
         switch self._type{
@@ -130,6 +155,9 @@ class DMNoticeView : UIView{
             break
         case .Custom:
             _configCustom()
+            break
+        case .Toast:
+            _configToast()
             break
         }
     }
@@ -182,6 +210,17 @@ class DMNoticeView : UIView{
         _configShapeLayer()
         _shapeLayer.path = path.CGPath
         self.layer.addSublayer(_shapeLayer)
+    }
+    
+    private func _configToast(){
+        centerFrame.origin.y += sHeight * 0.25
+        _label = UILabel(frame: CGRectMake(centerFrame.origin.x + centerFrame.size.width * 0.1, centerFrame.origin.y + centerFrame.size.height * 0.1, centerFrame.size.width * 0.8, centerFrame.size.height * 0.8))
+        _label.font = UIFont.systemFontOfSize(13)
+        _label.textColor = UIColor.whiteColor()
+        _label.textAlignment = NSTextAlignment.Center
+        _label.numberOfLines = 3
+        _label.text = self.text
+        self.addSubview(_label)
     }
     
     private func _configShapeLayer(){
