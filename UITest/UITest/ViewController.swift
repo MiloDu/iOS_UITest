@@ -166,6 +166,7 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         print("onbutton clicked")
         if(sender.tag == 1){
             showHudLoading()
+            NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: "testUITableView", userInfo: nil, repeats: false)
         }else if(sender.tag == 2){
 //            showHudOK()
             self.presentViewController(ViewController2(), animated: true, completion: nil)
@@ -180,6 +181,11 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         tableView.beginRefresh()
     }
 
+    func testUITableView(){
+        hideHud()
+        self.navigationController?.pushViewController(ViewController3(), animated: true)
+    }
+    
     //MARK: RefreshDelegate
     func onRefresh(type : DMRefreshViewType){
         print("onRefresh = \(type)")
