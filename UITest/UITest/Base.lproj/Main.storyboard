@@ -38,6 +38,13 @@
                                     <action selector="onButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XX3-d4-0AB"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EwA-cg-cTH">
+                                <rect key="frame" x="137" y="243" width="46" height="30"/>
+                                <state key="normal" title="Go"/>
+                                <connections>
+                                    <action selector="onButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ntc-8C-PzA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -56,7 +63,7 @@
         <!--Navigation Controller-->
         <scene sceneID="g1s-F3-e0X">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="z6c-td-u5I" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Main" automaticallyAdjustsScrollViewInsets="NO" id="z6c-td-u5I" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="H8i-d6-7Ty">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
