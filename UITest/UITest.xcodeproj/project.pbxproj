@@ -17,6 +17,7 @@
 		268220611C37AD710008341F /* TestFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268220601C37AD710008341F /* TestFooter.swift */; };
 		268220631C37BC180008341F /* ExtensionUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268220621C37BC180008341F /* ExtensionUIButton.swift */; };
 		268C2E411C3175E900231D09 /* DMChartLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268C2E401C3175E900231D09 /* DMChartLineView.swift */; };
+		2698A8DD1C37FBE800178784 /* ViewController4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2698A8DC1C37FBE800178784 /* ViewController4.swift */; };
 		26B8160B1C2EBB730062692A /* CellTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B8160A1C2EBB730062692A /* CellTest.swift */; };
 		26DB0F091C2E85BC007C1E28 /* DMCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0EFF1C2E85BC007C1E28 /* DMCircleView.swift */; };
 		26DB0F0B1C2E85BC007C1E28 /* DMRefreshBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26DB0F031C2E85BC007C1E28 /* DMRefreshBaseView.swift */; };
@@ -58,6 +59,7 @@
 		268220601C37AD710008341F /* TestFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestFooter.swift; path = TestCell/TestFooter.swift; sourceTree = "<group>"; };
 		268220621C37BC180008341F /* ExtensionUIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIButton.swift; sourceTree = "<group>"; };
 		268C2E401C3175E900231D09 /* DMChartLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DMChartLineView.swift; path = DMChartView/DMChartLineView.swift; sourceTree = "<group>"; };
+		2698A8DC1C37FBE800178784 /* ViewController4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController4.swift; sourceTree = "<group>"; };
 		26B8160A1C2EBB730062692A /* CellTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellTest.swift; sourceTree = "<group>"; };
 		26DB0EFF1C2E85BC007C1E28 /* DMCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMCircleView.swift; sourceTree = "<group>"; };
 		26DB0F031C2E85BC007C1E28 /* DMRefreshBaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMRefreshBaseView.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 				26F7793C1C1E4B8D000D3A2F /* ViewController.swift */,
 				26FC2F2D1C3414D4007F3626 /* ViewController2.swift */,
 				26FA7CC01C37851800D00486 /* ViewController3.swift */,
+				2698A8DC1C37FBE800178784 /* ViewController4.swift */,
 				26B8160A1C2EBB730062692A /* CellTest.swift */,
 				26FA7CC31C37862000D00486 /* TestModel */,
 				26FA7CC21C37852500D00486 /* TestCell */,
@@ -339,6 +342,7 @@
 				2621632C1C32C7E0005C14A2 /* UIArrowView.swift in Sources */,
 				2621632A1C32C7CC005C14A2 /* UIDollarView.swift in Sources */,
 				26DB0F091C2E85BC007C1E28 /* DMCircleView.swift in Sources */,
+				2698A8DD1C37FBE800178784 /* ViewController4.swift in Sources */,
 				636822561C30C56200D8A8E9 /* DMChartAxesView.swift in Sources */,
 				636822601C313D6A00D8A8E9 /* ExtensionViewController.swift in Sources */,
 				268220611C37AD710008341F /* TestFooter.swift in Sources */,

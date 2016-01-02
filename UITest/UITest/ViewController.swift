@@ -28,6 +28,7 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
 //        test3D()
 //        testChartView()
 //        testEncryt()
+        testImage()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -162,6 +163,22 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         }
     }
 
+    func testImage(){
+        let imageView = UIImageView(frame: CGRectMake(20, 100, 100, 100))
+//        imageView.backgroundColor = UIColor.redColor()
+        imageView.image = UIImageView.imageHollowWithColor(UIColor.cyanColor(), size: imageView.frame.size, cornerRadius: 30, lineWidth: 2)
+        self.view.addSubview(imageView)
+        
+        let imageView2 = UIImageView(frame: CGRectMake(140, 100, 100, 100))
+        imageView2.image = UIImageView.imageWithColor(UIColor.greenColor())
+        self.view.addSubview(imageView2)
+        
+        let imageView3 = UIImageView(frame: CGRectMake(20, 220, 100, 100))
+//        imageView3.backgroundColor = UIColor.redColor()
+        imageView3.image = UIImageView.imageCornerWithColor(UIColor.yellowColor(), size: imageView3.frame.size, cornerRadius: 20)
+        self.view.addSubview(imageView3)
+    }
+    
     @IBAction func onButtonClicked(sender: UIButton) {
         print("onbutton clicked")
         if(sender.tag == 1){
@@ -174,6 +191,8 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
 //            showHudError()
 //            showHudCustom()
             toast("toast = \(NSDate().timeIntervalSince1970)")
+        }else if(sender.tag == 10){
+            self.navigationController?.pushViewController(ViewController4(), animated: true)
         }
     }
     
