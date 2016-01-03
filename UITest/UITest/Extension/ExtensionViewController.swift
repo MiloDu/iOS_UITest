@@ -106,8 +106,8 @@ extension UIViewController {
     }
     
     func _onKeyboardShow(notification : NSNotification){
-        let keyboardInfo = notification.userInfo![UIKeyboardFrameBeginUserInfoKey]
-        let height = keyboardInfo?.CGRectValue.size.height
+//        let keyboardInfo = notification.userInfo![UIKeyboardFrameBeginUserInfoKey]
+//        let height = keyboardInfo?.CGRectValue.size.height
         if(tapGesture == nil){
             tapGesture = UITapGestureRecognizer(target: self, action: "hideKeyboard")
         }

@@ -28,7 +28,7 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
 //        test3D()
 //        testChartView()
 //        testEncryt()
-        testImage()
+//        testImage()
     }
     
     override func viewDidAppear(animated: Bool) {
