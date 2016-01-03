@@ -10,6 +10,8 @@
 		2621632A1C32C7CC005C14A2 /* UIDollarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262163291C32C7CC005C14A2 /* UIDollarView.swift */; };
 		2621632C1C32C7E0005C14A2 /* UIArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2621632B1C32C7E0005C14A2 /* UIArrowView.swift */; };
 		2632B22E1C315C5C002A4A23 /* DMCacheUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2632B22D1C315C5C002A4A23 /* DMCacheUtils.swift */; };
+		264CB02F1C391A240080DC74 /* UIViscidView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264CB02E1C391A240080DC74 /* UIViscidView.swift */; };
+		264CB0311C3951520080DC74 /* Public.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264CB0301C3951520080DC74 /* Public.swift */; };
 		26650A8F1C2F7C0200F132BA /* DMRefreshHeaderViewDollar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26650A8E1C2F7C0200F132BA /* DMRefreshHeaderViewDollar.swift */; };
 		26650A951C2F972900F132BA /* DMPathUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26650A941C2F972900F132BA /* DMPathUtils.swift */; };
 		2669F11E1C2FE2570002DF14 /* DMAnimationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2669F11D1C2FE2570002DF14 /* DMAnimationUtils.swift */; };
@@ -52,6 +54,8 @@
 		262163291C32C7CC005C14A2 /* UIDollarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDollarView.swift; sourceTree = "<group>"; };
 		2621632B1C32C7E0005C14A2 /* UIArrowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIArrowView.swift; sourceTree = "<group>"; };
 		2632B22D1C315C5C002A4A23 /* DMCacheUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMCacheUtils.swift; sourceTree = "<group>"; };
+		264CB02E1C391A240080DC74 /* UIViscidView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViscidView.swift; sourceTree = "<group>"; };
+		264CB0301C3951520080DC74 /* Public.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Public.swift; path = Extension/Public.swift; sourceTree = "<group>"; };
 		26650A8E1C2F7C0200F132BA /* DMRefreshHeaderViewDollar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMRefreshHeaderViewDollar.swift; sourceTree = "<group>"; };
 		26650A941C2F972900F132BA /* DMPathUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMPathUtils.swift; sourceTree = "<group>"; };
 		2669F11D1C2FE2570002DF14 /* DMAnimationUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMAnimationUtils.swift; sourceTree = "<group>"; };
@@ -120,8 +124,9 @@
 				26650A941C2F972900F132BA /* DMPathUtils.swift */,
 				2669F11D1C2FE2570002DF14 /* DMAnimationUtils.swift */,
 				636822581C30D81E00D8A8E9 /* UILabelWithPadding.swift */,
-				262163291C32C7CC005C14A2 /* UIDollarView.swift */,
 				2621632B1C32C7E0005C14A2 /* UIArrowView.swift */,
+				262163291C32C7CC005C14A2 /* UIDollarView.swift */,
+				264CB02E1C391A240080DC74 /* UIViscidView.swift */,
 				636822511C30BDBE00D8A8E9 /* DMChartView */,
 				26DB0EFE1C2E85BC007C1E28 /* DMCircleView */,
 				26DB0F001C2E85BC007C1E28 /* DMNoticeView */,
@@ -237,6 +242,7 @@
 				6368225E1C313D6A00D8A8E9 /* ExtensionViewController.swift */,
 				63C595141C322219007AF6EA /* ExtensionString.swift */,
 				268220621C37BC180008341F /* ExtensionUIButton.swift */,
+				264CB0301C3951520080DC74 /* Public.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -324,7 +330,9 @@
 				26DB0F111C2E85DE007C1E28 /* DMUtils.swift in Sources */,
 				26DB0F0E1C2E85BC007C1E28 /* ScrollView+DMRefresh.swift in Sources */,
 				63C595151C322219007AF6EA /* ExtensionString.swift in Sources */,
+				264CB0311C3951520080DC74 /* Public.swift in Sources */,
 				26F7793D1C1E4B8D000D3A2F /* ViewController.swift in Sources */,
+				264CB02F1C391A240080DC74 /* UIViscidView.swift in Sources */,
 				26DB0F0B1C2E85BC007C1E28 /* DMRefreshBaseView.swift in Sources */,
 				26FA7CC51C37867000D00486 /* TestCell1.swift in Sources */,
 				2632B22E1C315C5C002A4A23 /* DMCacheUtils.swift in Sources */,
