@@ -24,7 +24,7 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         self.edgesForExtendedLayout = UIRectEdge.None
         
 //        testCircleView()
-//        testRefresh()
+        testRefresh()
 //        test3D()
 //        testChartView()
 //        testEncryt()
@@ -89,7 +89,7 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         footerView.backgroundColor = UIColor.greenColor()
         tableView.tableFooterView = footerView
 
-        tableView.contentInset = UIEdgeInsetsMake(40, 0, 0, 0)
+//        tableView.contentInset = UIEdgeInsetsMake(40, 0, 0, 0)
         
         tableView.addRefreshHeader(frame: CGRectMake(0 , 0, 320, 64),type: DMRefreshHeaderViewType.Dollar)
         tableView.addRefreshFooter(frame : CGRectMake(0,0,320,64))
