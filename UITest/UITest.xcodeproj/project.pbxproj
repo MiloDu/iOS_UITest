@@ -17,7 +17,6 @@
 		2669F11E1C2FE2570002DF14 /* DMAnimationUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2669F11D1C2FE2570002DF14 /* DMAnimationUtils.swift */; };
 		2682205F1C37A3E50008341F /* TestHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2682205E1C37A3E50008341F /* TestHeader.swift */; };
 		268220611C37AD710008341F /* TestFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268220601C37AD710008341F /* TestFooter.swift */; };
-		268220631C37BC180008341F /* ExtensionUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268220621C37BC180008341F /* ExtensionUIButton.swift */; };
 		268C2E411C3175E900231D09 /* DMChartLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268C2E401C3175E900231D09 /* DMChartLineView.swift */; };
 		2698A8DD1C37FBE800178784 /* ViewController4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2698A8DC1C37FBE800178784 /* ViewController4.swift */; };
 		26B8160B1C2EBB730062692A /* CellTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B8160A1C2EBB730062692A /* CellTest.swift */; };
@@ -40,6 +39,7 @@
 		26FA7CCB1C37877400D00486 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FA7CCA1C37877400D00486 /* Group.swift */; };
 		26FA7CCD1C3790AA00D00486 /* TestCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FA7CCC1C3790AA00D00486 /* TestCell2.swift */; };
 		26FC2F2E1C3414D4007F3626 /* ViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FC2F2D1C3414D4007F3626 /* ViewController2.swift */; };
+		6347495C1C39F1D40005D5C4 /* ExtensionUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6347495B1C39F1D40005D5C4 /* ExtensionUIButton.swift */; };
 		636822561C30C56200D8A8E9 /* DMChartAxesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636822541C30C56200D8A8E9 /* DMChartAxesView.swift */; };
 		636822571C30C56200D8A8E9 /* DMChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636822551C30C56200D8A8E9 /* DMChartView.swift */; };
 		636822591C30D81E00D8A8E9 /* UILabelWithPadding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636822581C30D81E00D8A8E9 /* UILabelWithPadding.swift */; };
@@ -61,7 +61,6 @@
 		2669F11D1C2FE2570002DF14 /* DMAnimationUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DMAnimationUtils.swift; sourceTree = "<group>"; };
 		2682205E1C37A3E50008341F /* TestHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestHeader.swift; path = TestCell/TestHeader.swift; sourceTree = "<group>"; };
 		268220601C37AD710008341F /* TestFooter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestFooter.swift; path = TestCell/TestFooter.swift; sourceTree = "<group>"; };
-		268220621C37BC180008341F /* ExtensionUIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionUIButton.swift; sourceTree = "<group>"; };
 		268C2E401C3175E900231D09 /* DMChartLineView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DMChartLineView.swift; path = DMChartView/DMChartLineView.swift; sourceTree = "<group>"; };
 		2698A8DC1C37FBE800178784 /* ViewController4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController4.swift; sourceTree = "<group>"; };
 		26B8160A1C2EBB730062692A /* CellTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CellTest.swift; sourceTree = "<group>"; };
@@ -86,6 +85,7 @@
 		26FA7CCA1C37877400D00486 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Group.swift; path = TestModel/Group.swift; sourceTree = "<group>"; };
 		26FA7CCC1C3790AA00D00486 /* TestCell2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestCell2.swift; path = TestCell/TestCell2.swift; sourceTree = "<group>"; };
 		26FC2F2D1C3414D4007F3626 /* ViewController2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController2.swift; sourceTree = "<group>"; };
+		6347495B1C39F1D40005D5C4 /* ExtensionUIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtensionUIButton.swift; path = Extension/ExtensionUIButton.swift; sourceTree = "<group>"; };
 		636822541C30C56200D8A8E9 /* DMChartAxesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DMChartAxesView.swift; path = DMChartView/DMChartAxesView.swift; sourceTree = "<group>"; };
 		636822551C30C56200D8A8E9 /* DMChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DMChartView.swift; path = DMChartView/DMChartView.swift; sourceTree = "<group>"; };
 		636822581C30D81E00D8A8E9 /* UILabelWithPadding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UILabelWithPadding.swift; sourceTree = "<group>"; };
@@ -238,10 +238,10 @@
 		6368225C1C313D4100D8A8E9 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				6347495B1C39F1D40005D5C4 /* ExtensionUIButton.swift */,
 				6368225D1C313D6A00D8A8E9 /* ExtensionUIView.swift */,
 				6368225E1C313D6A00D8A8E9 /* ExtensionViewController.swift */,
 				63C595141C322219007AF6EA /* ExtensionString.swift */,
-				268220621C37BC180008341F /* ExtensionUIButton.swift */,
 				264CB0301C3951520080DC74 /* Public.swift */,
 			);
 			name = Extension;
@@ -328,6 +328,7 @@
 				636822571C30C56200D8A8E9 /* DMChartView.swift in Sources */,
 				2669F11E1C2FE2570002DF14 /* DMAnimationUtils.swift in Sources */,
 				26DB0F111C2E85DE007C1E28 /* DMUtils.swift in Sources */,
+				6347495C1C39F1D40005D5C4 /* ExtensionUIButton.swift in Sources */,
 				26DB0F0E1C2E85BC007C1E28 /* ScrollView+DMRefresh.swift in Sources */,
 				63C595151C322219007AF6EA /* ExtensionString.swift in Sources */,
 				264CB0311C3951520080DC74 /* Public.swift in Sources */,
@@ -346,7 +347,6 @@
 				26F7793B1C1E4B8D000D3A2F /* AppDelegate.swift in Sources */,
 				6368225B1C3110EB00D8A8E9 /* DMChartBarView.swift in Sources */,
 				26FA7CC11C37851800D00486 /* ViewController3.swift in Sources */,
-				268220631C37BC180008341F /* ExtensionUIButton.swift in Sources */,
 				2621632C1C32C7E0005C14A2 /* UIArrowView.swift in Sources */,
 				2621632A1C32C7CC005C14A2 /* UIDollarView.swift in Sources */,
 				26DB0F091C2E85BC007C1E28 /* DMCircleView.swift in Sources */,
