@@ -17,35 +17,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KAD-qC-50W">
+                            <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KAD-qC-50W">
                                 <rect key="frame" x="74" y="366" width="196" height="30"/>
                                 <state key="normal" title="loading"/>
                                 <connections>
                                     <action selector="onButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="csa-ep-0Nb"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Pr-eC-1RM">
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Pr-eC-1RM">
                                 <rect key="frame" x="74" y="417" width="196" height="30"/>
                                 <state key="normal" title="ok"/>
                                 <connections>
                                     <action selector="onButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fj9-v2-woH"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5nz-3s-ORH">
+                            <button opaque="NO" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5nz-3s-ORH">
                                 <rect key="frame" x="74" y="476" width="196" height="30"/>
                                 <state key="normal" title="error"/>
                                 <connections>
                                     <action selector="onButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XX3-d4-0AB"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EwA-cg-cTH">
+                            <button opaque="NO" tag="10" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EwA-cg-cTH">
                                 <rect key="frame" x="137" y="243" width="46" height="30"/>
                                 <state key="normal" title="Go"/>
                                 <connections>
                                     <action selector="onButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ntc-8C-PzA"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V77-8e-I0R" customClass="UIViscidView" customModule="UITest" customModuleProvider="target">
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V77-8e-I0R" customClass="UIViscidView" customModule="UITest" customModuleProvider="target">
                                 <rect key="frame" x="143" y="106" width="34" height="31"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>

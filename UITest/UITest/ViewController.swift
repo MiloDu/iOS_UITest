@@ -94,9 +94,13 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         tableView.addRefreshHeader(frame: CGRectMake(0 , 0, 320, 64),type: DMRefreshHeaderViewType.Dollar)
         tableView.addRefreshFooter(frame : CGRectMake(0,0,320,64))
         tableView.delegateRefresh = self
-        print("frame = \(tableView.frame)")
-        print("size = \(tableView.contentSize)")
-        print("offset = \(tableView.contentOffset)")
+//        print("frame = \(tableView.frame)")
+//        print("size = \(tableView.contentSize)")
+//        print("offset = \(tableView.contentOffset)")
+        
+//        UIView.animateWithDuration(5) { () -> Void in
+//            self.tableView.layer.transform = CATransform3DMakeScale(0.3, 0.3, 1)
+//        }
     }
     
     func testChartView(){
@@ -210,7 +214,7 @@ class ViewController: UIViewController, UITableViewDataSource, DMRefreshDelegate
         print("onRefresh = \(type)")
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         if(type == DMRefreshViewType.Header){
-            NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "refreshHeaderEnd", userInfo: nil, repeats: false)
+            NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "refreshHeaderEnd", userInfo: nil, repeats: false)
         }else{
             NSTimer.scheduledTimerWithTimeInterval(2, target: self, selector: "refreshFooterEnd", userInfo: nil, repeats: false)
         }

@@ -17,8 +17,7 @@ class DMRefreshHeaderViewDollar : DMRefreshHeaderViewBase {
         super._config()
         let width = CGRectGetWidth(self.frame)
         let height = CGRectGetHeight(self.frame)
-        let frame = CGRectMake(width * 0.5 - 12, height - 24 * 1.5, 24, 24)
-        print("y = \(frame.origin.y)")
+        let frame = CGRectMake(width * 0.5 - 12, height - 24, 24, 24)
 //        let width : CGFloat = 24
 //        let x = self.frame.size.width * 0.47
 //        let y = self.frame.size.height * 0.5
@@ -57,21 +56,15 @@ class DMRefreshHeaderViewDollar : DMRefreshHeaderViewBase {
     
     override func _onStateChangeWithOffset(offset: CGPoint) {
         super._onStateChangeWithOffset(offset)
-//        print("y = \(offset.y),origin = \(originalHeight)")
-//        let end = min(1, offset.y / originalHeight)
-//        dollarView.setStrokeEnd(end)
         let height = viscidView.frame.size.height
-        let offsetY = offset.y - height * 1.5
-        if offsetY > 0{
+        let offsetY = offset.y - height
+        if offsetY > 0 {
             var frame = viscidView.frame
-            frame.origin.y = CGRectGetHeight(self.frame) - height * 1.5 - (offsetY)
+            frame.origin.y = CGRectGetHeight(self.frame) - height - (offsetY)
             viscidView.frame = frame
-            viscidView.start()
-//            let a : CGFloat = offset.y - height
-//            let b : CGFloat = CGRectGetHeight(self.frame) - height
-//            print("a = \(a)")
-//            print("b = \(b)")
-//            print("c = \(b - a)")
+            if self.scrollView.dragging{
+                viscidView.start()
+            }
             viscidView.offset = CGPointMake(0, offsetY)
         } else {
             viscidView.end()
